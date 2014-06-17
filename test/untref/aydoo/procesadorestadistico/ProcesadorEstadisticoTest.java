@@ -6,7 +6,7 @@ import org.junit.Test;
 public class ProcesadorEstadisticoTest {
 
 	@Test
-	public void test() {
+	public void getBicicletaUtilizadaMasVecesDeberiaRetornarBicicleta1() {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
 
