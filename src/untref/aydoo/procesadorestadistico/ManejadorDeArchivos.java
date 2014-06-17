@@ -23,10 +23,9 @@ public class ManejadorDeArchivos {
 
 		reader = new CSVReader(new FileReader(archivo), ';');
 
-		String[] nextLine;
+		reader.readNext(); // header
 
-		// header
-		reader.readNext();
+		String[] nextLine;
 
 		while ((nextLine = reader.readNext()) != null && nextLine.length != 0) {
 
@@ -34,10 +33,10 @@ public class ManejadorDeArchivos {
 			int bicicletaid = Integer.parseInt(nextLine[1]);
 			int origenestacionid = Integer.parseInt(nextLine[3]);
 			int destinoestacionid = Integer.parseInt(nextLine[6]);
-			
+
 			Date origenfecha = dateParser.parse(nextLine[2]);
 			Date destinofecha = dateParser.parse(nextLine[5]);
-			
+
 			int tiempouso = Integer.parseInt(nextLine[8]);
 
 			String origennombre = nextLine[4];
