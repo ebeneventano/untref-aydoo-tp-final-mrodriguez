@@ -1,7 +1,10 @@
 package untref.aydoo.procesadorestadistico;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+
+import net.lingala.zip4j.exception.ZipException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,11 +13,12 @@ public class ProcesadorEstadisticoTest {
 
 	@Test
 	public void getBicicletaUtilizadaMasVecesDeberiaRetornarBicicletaCalculada()
-			throws IOException, ParseException {
+			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
+		File archivo = new File("test.zip");
 
-		procesadorEstadistico.procesarRegistros("test.csv");
+		procesadorEstadistico.procesarRegistros(archivo);
 		Bicicleta bicicleta = procesadorEstadistico
 				.getBicicletaUtilizadaMasVeces();
 
@@ -23,11 +27,12 @@ public class ProcesadorEstadisticoTest {
 
 	@Test
 	public void getBicicletaUtilizadaMenosVecesDeberiaRetornarBicicletaCalculada()
-			throws IOException, ParseException {
+			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
+		File archivo = new File("test.zip");
 
-		procesadorEstadistico.procesarRegistros("test.csv");
+		procesadorEstadistico.procesarRegistros(archivo);
 		Bicicleta bicicleta = procesadorEstadistico
 				.getBicicletaUtilizadaMenosVeces();
 
@@ -36,11 +41,12 @@ public class ProcesadorEstadisticoTest {
 
 	@Test
 	public void getTiempoPromedioDeUsoDeberiaRetornarValorCalculado()
-			throws IOException, ParseException {
+			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
+		File archivo = new File("test.zip");
 
-		procesadorEstadistico.procesarRegistros("test.csv");
+		procesadorEstadistico.procesarRegistros(archivo);
 		double tiempoPromedioDeUso = procesadorEstadistico
 				.getTiempoPromedioDeUso();
 
@@ -49,15 +55,14 @@ public class ProcesadorEstadisticoTest {
 
 	@Test
 	public void getRecorridoMasVecesRealizadoDeberiaRetornarRecorridoCalculado()
-			throws IOException, ParseException {
+			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
+		File archivo = new File("test.zip");
 
-		procesadorEstadistico.procesarRegistros("test.csv");
+		procesadorEstadistico.procesarRegistros(archivo);
 		Recorrido recorrido = procesadorEstadistico
 				.getRecorridoMasVecesRealizado();
-
-		System.out.println(recorrido.toString());
 
 		Recorrido recorridoEsperado = new Recorrido(8, 8, "PLAZA ITALIA",
 				"PLAZA ITALIA");

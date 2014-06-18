@@ -1,10 +1,13 @@
 package untref.aydoo.procesadorestadistico;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
+
+import net.lingala.zip4j.exception.ZipException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,10 +16,10 @@ public class ManejadorDeArchivosTest {
 
 	@Test
 	public void cargarRegistrosDeberiaRetornar10000Registros()
-			throws IOException, ParseException {
+			throws IOException, ParseException, ZipException {
 
 		ManejadorDeArchivos manejadorDeArchivos = new ManejadorDeArchivos();
-		String archivo = "test.csv";
+		File archivo = new File("test.zip");
 
 		Set<Registro> registros = manejadorDeArchivos.cargarRegistros(archivo);
 
@@ -25,10 +28,10 @@ public class ManejadorDeArchivosTest {
 
 	@Test
 	public void cararRegistrosDeberiaGenerarRegistroCorrectamente()
-			throws IOException, ParseException {
+			throws IOException, ParseException, ZipException {
 
 		ManejadorDeArchivos manejadorDeArchivos = new ManejadorDeArchivos();
-		String archivo = "test.csv";
+		File archivo = new File("test.zip");
 		SimpleDateFormat dateParser = new SimpleDateFormat(
 				"yyyy-mm-dd hh:mm:ss");
 

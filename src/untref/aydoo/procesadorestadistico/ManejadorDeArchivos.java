@@ -1,5 +1,6 @@
 package untref.aydoo.procesadorestadistico;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -7,6 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 
 import au.com.bytecode.opencsv.CSVReader;
 
@@ -16,12 +20,17 @@ public class ManejadorDeArchivos {
 	private SimpleDateFormat dateParser = new SimpleDateFormat(
 			"yyyy-mm-dd hh:mm:ss");
 
-	public Set<Registro> cargarRegistros(String archivo) throws IOException,
-			ParseException {
+	public Set<Registro> cargarRegistros(File archivo) throws IOException,
+			ParseException, ZipException {
+
+		this.descomprimirZIPs(archivo);
 
 		Set<Registro> registros = new HashSet<Registro>();
 
-		reader = new CSVReader(new FileReader(archivo), ';');
+		String archivoCSV = archivo.getName().substring(0,
+				archivo.getName().length() - 4)
+				+ ".csv";
+		reader = new CSVReader(new FileReader(archivoCSV), ';');
 
 		reader.readNext(); // header
 
@@ -52,6 +61,12 @@ public class ManejadorDeArchivos {
 		reader.close();
 
 		return registros;
+	}
+
+	private void descomprimirZIPs(File archivo) throws ZipException {
+
+		ZipFile zipFile = new ZipFile(archivo);
+		zipFile.extractAll(".");
 	}
 
 }

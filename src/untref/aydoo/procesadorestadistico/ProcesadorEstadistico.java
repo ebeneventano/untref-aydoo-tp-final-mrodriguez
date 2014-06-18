@@ -1,11 +1,14 @@
 package untref.aydoo.procesadorestadistico;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
+import net.lingala.zip4j.exception.ZipException;
 
 public class ProcesadorEstadistico {
 
@@ -14,6 +17,10 @@ public class ProcesadorEstadistico {
 	private Map<Integer, Bicicleta> bicicletas;
 	private Map<String, Recorrido> recorridos;
 
+	public static void main(String[] args) {
+
+	}
+
 	public ProcesadorEstadistico() {
 
 		this.manejadorDeArchivos = new ManejadorDeArchivos();
@@ -21,8 +28,8 @@ public class ProcesadorEstadistico {
 		this.recorridos = new HashMap<String, Recorrido>();
 	}
 
-	public void procesarRegistros(String archivo) throws IOException,
-			ParseException {
+	public void procesarRegistros(File archivo) throws IOException,
+			ParseException, ZipException {
 
 		this.registros = this.manejadorDeArchivos.cargarRegistros(archivo);
 
