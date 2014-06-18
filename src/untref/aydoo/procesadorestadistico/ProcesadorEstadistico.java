@@ -1,5 +1,7 @@
 package untref.aydoo.procesadorestadistico;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,11 +16,15 @@ public class ProcesadorEstadistico {
 
 	public ProcesadorEstadistico() {
 
+		this.manejadorDeArchivos = new ManejadorDeArchivos();
 		this.bicicletas = new HashMap<Integer, Bicicleta>();
+		this.recorridos = new HashMap<String, Recorrido>();
 	}
 
-	public void procesarRegistros() {
+	public void procesarRegistros(String archivo) throws IOException, ParseException {
 
+		this.registros = this.manejadorDeArchivos.cargarRegistros(archivo);
+		
 		Iterator<Registro> iterador = this.registros.iterator();
 
 		while (iterador.hasNext()) {
