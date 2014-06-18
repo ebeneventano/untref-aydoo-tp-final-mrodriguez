@@ -18,4 +18,9 @@ public class Viaje {
 		this.recorrido = recorrido;
 	}
 
+	public int getTiempouso() {
+
+		return this.tiempouso;
+	}
+
 }

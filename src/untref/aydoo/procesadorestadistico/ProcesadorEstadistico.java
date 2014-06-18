@@ -118,5 +118,30 @@ public class ProcesadorEstadistico {
 
 		return bicicletaUtilizadaMenosVeces;
 	}
+	
+	public double getTiempoPromedioDeUso() {
+
+		int sumador = 0;
+		int contador = 0;
+
+		Iterator<Bicicleta> iterador = this.bicicletas.values().iterator();
+
+		while (iterador.hasNext()) {
+
+			Bicicleta bicicleta = iterador.next();
+
+			Iterator<Viaje> iteradorViajes = bicicleta.getViajes().iterator();
+
+			while (iteradorViajes.hasNext()) {
+
+				Viaje viaje = iteradorViajes.next();
+
+				sumador += viaje.getTiempouso();
+				contador++;
+			}
+		}
+
+		return (double) sumador / contador;
+	}
 
 }

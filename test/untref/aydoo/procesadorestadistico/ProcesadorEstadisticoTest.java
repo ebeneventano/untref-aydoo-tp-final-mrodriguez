@@ -31,5 +31,16 @@ public class ProcesadorEstadisticoTest {
 
 		Assert.assertEquals(1102, bicicleta.getId());
 	}
+	
+	@Test
+	public void getTiempoPromedioDeUsoDeberiaRetornar() throws IOException, ParseException {
+
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
+
+		procesadorEstadistico.procesarRegistros("test.csv");
+		double tiempoPromedioDeUso = procesadorEstadistico.getTiempoPromedioDeUso();
+		
+		Assert.assertEquals(28.28, tiempoPromedioDeUso, 0.1);
+	}
 
 }
