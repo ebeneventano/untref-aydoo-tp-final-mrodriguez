@@ -29,4 +29,36 @@ public class Registro {
 		this.destinonombre = destinonombre;
 	}
 
+	public int getBicicletaid() {
+		return bicicletaid;
+	}
+
+	public int getOrigenestacionid() {
+		return origenestacionid;
+	}
+
+	public int getDestinoestacionid() {
+		return destinoestacionid;
+	}
+
+	public Date getOrigenfecha() {
+		return origenfecha;
+	}
+
+	public Date getDestinofecha() {
+		return destinofecha;
+	}
+
+	public int getTiempouso() {
+		return tiempouso;
+	}
+
+	public String getOrigennombre() {
+		return origennombre;
+	}
+
+	public String getDestinonombre() {
+		return destinonombre;
+	}
+
 }

@@ -10,10 +10,11 @@ public class ProcesadorEstadisticoTest {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
 
+		procesadorEstadistico.procesarRegistros();
 		Bicicleta bicicleta = procesadorEstadistico
 				.getBicicletaUtilizadaMasVeces();
 
-		Assert.assertEquals(1, bicicleta.getId());
+		Assert.assertEquals(1235, bicicleta.getId());
 	}
 
 }
