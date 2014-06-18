@@ -118,7 +118,7 @@ public class ProcesadorEstadistico {
 
 		return bicicletaUtilizadaMenosVeces;
 	}
-	
+
 	public double getTiempoPromedioDeUso() {
 
 		int sumador = 0;

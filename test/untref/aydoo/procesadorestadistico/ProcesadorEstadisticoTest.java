@@ -9,7 +9,8 @@ import org.junit.Test;
 public class ProcesadorEstadisticoTest {
 
 	@Test
-	public void getBicicletaUtilizadaMasVecesDeberiaRetornarBicicleta1235() throws IOException, ParseException {
+	public void getBicicletaUtilizadaMasVecesDeberiaRetornarBicicleta1235()
+			throws IOException, ParseException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
 
@@ -19,9 +20,10 @@ public class ProcesadorEstadisticoTest {
 
 		Assert.assertEquals(1235, bicicleta.getId());
 	}
-	
+
 	@Test
-	public void getBicicletaUtilizadaMenosVecesDeberiaRetornarBicicleta1102() throws IOException, ParseException {
+	public void getBicicletaUtilizadaMenosVecesDeberiaRetornarBicicleta1102()
+			throws IOException, ParseException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
 
@@ -31,15 +33,17 @@ public class ProcesadorEstadisticoTest {
 
 		Assert.assertEquals(1102, bicicleta.getId());
 	}
-	
+
 	@Test
-	public void getTiempoPromedioDeUsoDeberiaRetornar() throws IOException, ParseException {
+	public void getTiempoPromedioDeUsoDeberiaRetornar() throws IOException,
+			ParseException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
 
 		procesadorEstadistico.procesarRegistros("test.csv");
-		double tiempoPromedioDeUso = procesadorEstadistico.getTiempoPromedioDeUso();
-		
+		double tiempoPromedioDeUso = procesadorEstadistico
+				.getTiempoPromedioDeUso();
+
 		Assert.assertEquals(28.28, tiempoPromedioDeUso, 0.1);
 	}
 
