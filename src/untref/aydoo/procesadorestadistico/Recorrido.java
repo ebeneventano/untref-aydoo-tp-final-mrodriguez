@@ -1,8 +1,5 @@
 package untref.aydoo.procesadorestadistico;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Recorrido {
 
 	private int origenestacionid;
