@@ -12,6 +12,9 @@ import net.lingala.zip4j.exception.ZipException;
 
 public class ProcesadorEstadistico {
 
+	private static boolean daemon;
+
+	private static String directorio;
 	private ManejadorDeArchivos manejadorDeArchivos;
 	private Set<Registro> registros;
 	private Map<Integer, Bicicleta> bicicletas;
@@ -19,6 +22,24 @@ public class ProcesadorEstadistico {
 
 	public static void main(String[] args) {
 
+		for (int i = 0; i < args.length; i++) {
+
+			switch (i) {
+			case 0:
+				directorio = args[0];
+			case 1:
+				if (args[i] == "-d") {
+					daemon = true;
+				} else {
+					daemon = false;
+				}
+			}
+		}
+	}
+
+	public static boolean isDaemon() {
+
+		return daemon;
 	}
 
 	public ProcesadorEstadistico() {

@@ -70,4 +70,24 @@ public class ProcesadorEstadisticoTest {
 		Assert.assertEquals(recorridoEsperado, recorrido);
 	}
 
+	@Test
+	public void isDaemonDeberiaRetornarTrueSiEspecificadoEnLineaDeComandos() {
+
+		String[] args = { "/", "-d" };
+
+		ProcesadorEstadistico.main(args);
+
+		Assert.assertTrue(ProcesadorEstadistico.isDaemon());
+	}
+
+	@Test
+	public void isDaemonDeberiaRetornarFalseSiNoEspecificadoEnLineaDeComandos() {
+
+		String[] args = { "/" };
+
+		ProcesadorEstadistico.main(args);
+
+		Assert.assertFalse(ProcesadorEstadistico.isDaemon());
+	}
+
 }
