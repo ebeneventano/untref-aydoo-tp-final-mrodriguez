@@ -144,4 +144,72 @@ public class ProcesadorEstadistico {
 		return (double) sumador / contador;
 	}
 
+	public Recorrido getRecorridoMasVecesRealizado() {
+
+		/*
+		 * Creación de un mapa con la cantidad de veces que se realizó el
+		 * recorrido.
+		 */
+
+		Map<Recorrido, Integer> mapaVecesRealizado = new HashMap<Recorrido, Integer>();
+
+		// Inicialización del mapa.
+
+		Iterator<Recorrido> iteradorRecorrido = recorridos.values().iterator();
+
+		while (iteradorRecorrido.hasNext()) {
+
+			Recorrido recorrido = iteradorRecorrido.next();
+
+			mapaVecesRealizado.put(recorrido, 0);
+		}
+
+		// Asignación de cantidad de recorridos.
+
+		Iterator<Bicicleta> iteradorBicicletas = this.bicicletas.values()
+				.iterator();
+
+		while (iteradorBicicletas.hasNext()) {
+
+			Bicicleta bicicleta = iteradorBicicletas.next();
+
+			Iterator<Viaje> iteradorViajes = bicicleta.getViajes().iterator();
+
+			while (iteradorViajes.hasNext()) {
+
+				Viaje viaje = iteradorViajes.next();
+
+				int vecesRealizado = mapaVecesRealizado.get(viaje
+						.getRecorrido()) + 1;
+				mapaVecesRealizado.put(viaje.getRecorrido(), vecesRealizado);
+			}
+		}
+
+		/*
+		 * Búsqueda del máximo.
+		 */
+
+		Recorrido recorridoMasVecesRealizado = null;
+
+		int vecesRealizado = 0;
+		int maximo = 0;
+
+		iteradorRecorrido = mapaVecesRealizado.keySet().iterator();
+
+		while (iteradorRecorrido.hasNext()) {
+
+			Recorrido recorrido = iteradorRecorrido.next();
+
+			vecesRealizado = mapaVecesRealizado.get(recorrido);
+
+			if (vecesRealizado > maximo) {
+
+				maximo = vecesRealizado;
+				recorridoMasVecesRealizado = recorrido;
+			}
+		}
+
+		return recorridoMasVecesRealizado;
+	}
+
 }

@@ -23,4 +23,9 @@ public class Viaje {
 		return this.tiempouso;
 	}
 
+	public Recorrido getRecorrido() {
+
+		return this.recorrido;
+	}
+
 }

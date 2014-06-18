@@ -9,7 +9,7 @@ import org.junit.Test;
 public class ProcesadorEstadisticoTest {
 
 	@Test
-	public void getBicicletaUtilizadaMasVecesDeberiaRetornarBicicleta1235()
+	public void getBicicletaUtilizadaMasVecesDeberiaRetornarBicicletaCalculada()
 			throws IOException, ParseException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
@@ -22,7 +22,7 @@ public class ProcesadorEstadisticoTest {
 	}
 
 	@Test
-	public void getBicicletaUtilizadaMenosVecesDeberiaRetornarBicicleta1102()
+	public void getBicicletaUtilizadaMenosVecesDeberiaRetornarBicicletaCalculada()
 			throws IOException, ParseException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
@@ -35,8 +35,8 @@ public class ProcesadorEstadisticoTest {
 	}
 
 	@Test
-	public void getTiempoPromedioDeUsoDeberiaRetornar() throws IOException,
-			ParseException {
+	public void getTiempoPromedioDeUsoDeberiaRetornarValorCalculado()
+			throws IOException, ParseException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
 
@@ -45,6 +45,24 @@ public class ProcesadorEstadisticoTest {
 				.getTiempoPromedioDeUso();
 
 		Assert.assertEquals(28.28, tiempoPromedioDeUso, 0.1);
+	}
+
+	@Test
+	public void getRecorridoMasVecesRealizadoDeberiaRetornarRecorridoCalculado()
+			throws IOException, ParseException {
+
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
+
+		procesadorEstadistico.procesarRegistros("test.csv");
+		Recorrido recorrido = procesadorEstadistico
+				.getRecorridoMasVecesRealizado();
+
+		System.out.println(recorrido.toString());
+
+		Recorrido recorridoEsperado = new Recorrido(8, 8, "PLAZA ITALIA",
+				"PLAZA ITALIA");
+
+		Assert.assertEquals(recorridoEsperado, recorrido);
 	}
 
 }
