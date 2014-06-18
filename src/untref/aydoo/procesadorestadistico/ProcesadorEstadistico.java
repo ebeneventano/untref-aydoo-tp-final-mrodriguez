@@ -21,10 +21,11 @@ public class ProcesadorEstadistico {
 		this.recorridos = new HashMap<String, Recorrido>();
 	}
 
-	public void procesarRegistros(String archivo) throws IOException, ParseException {
+	public void procesarRegistros(String archivo) throws IOException,
+			ParseException {
 
 		this.registros = this.manejadorDeArchivos.cargarRegistros(archivo);
-		
+
 		Iterator<Registro> iterador = this.registros.iterator();
 
 		while (iterador.hasNext()) {
@@ -83,6 +84,39 @@ public class ProcesadorEstadistico {
 		}
 
 		return bicicletaUtilizadaMasVeces;
+	}
+
+	public Bicicleta getBicicletaUtilizadaMenosVeces() {
+
+		Iterator<Bicicleta> iterador = this.bicicletas.values().iterator();
+
+		Bicicleta bicicletaUtilizadaMenosVeces = null;
+
+		int vecesUtilizada = 0;
+		int minimo = 0;
+
+		if (iterador.hasNext()) {
+
+			Bicicleta bicicleta = iterador.next();
+			vecesUtilizada = bicicleta.getViajes().size();
+			minimo = vecesUtilizada;
+			bicicletaUtilizadaMenosVeces = bicicleta;
+		}
+
+		while (iterador.hasNext()) {
+
+			Bicicleta bicicleta = iterador.next();
+
+			vecesUtilizada = bicicleta.getViajes().size();
+
+			if (vecesUtilizada < minimo) {
+
+				minimo = vecesUtilizada;
+				bicicletaUtilizadaMenosVeces = bicicleta;
+			}
+		}
+
+		return bicicletaUtilizadaMenosVeces;
 	}
 
 }
