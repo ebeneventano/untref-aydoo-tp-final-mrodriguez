@@ -1,6 +1,7 @@
 package untref.aydoo.procesadorestadistico;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -75,7 +76,14 @@ public class ProcesadorEstadisticoTest {
 
 		String[] args = { "/", "-d" };
 
-		ProcesadorEstadistico.main(args);
+		try {
+
+			ProcesadorEstadistico.main(args);
+
+		} catch (IOException | ParseException | ZipException e) {
+
+			Assert.assertEquals(ZipException.class, e.getClass());
+		}
 
 		Assert.assertTrue(ProcesadorEstadistico.isDaemon());
 	}
@@ -85,7 +93,14 @@ public class ProcesadorEstadisticoTest {
 
 		String[] args = { "/" };
 
-		ProcesadorEstadistico.main(args);
+		try {
+
+			ProcesadorEstadistico.main(args);
+
+		} catch (IOException | ParseException | ZipException e) {
+
+			Assert.assertEquals(ZipException.class, e.getClass());
+		}
 
 		Assert.assertFalse(ProcesadorEstadistico.isDaemon());
 	}
