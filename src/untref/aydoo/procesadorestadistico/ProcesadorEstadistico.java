@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.yaml.snakeyaml.Yaml;
+
 import net.lingala.zip4j.exception.ZipException;
 
 public class ProcesadorEstadistico {
@@ -238,6 +240,31 @@ public class ProcesadorEstadistico {
 		}
 
 		return recorridoMasVecesRealizado;
+	}
+
+	public Resultado getResultado() {
+
+		Bicicleta bicicletaUtilizadaMasVeces = this
+				.getBicicletaUtilizadaMasVeces();
+		Bicicleta bicicletaUtilizadaMenosVeces = this
+				.getBicicletaUtilizadaMenosVeces();
+		double tiempoPromedioDeUso = this.getTiempoPromedioDeUso();
+		Recorrido recorridoMasVecesRealizado = this
+				.getRecorridoMasVecesRealizado();
+
+		Resultado resultado = new Resultado(bicicletaUtilizadaMasVeces,
+				bicicletaUtilizadaMenosVeces, tiempoPromedioDeUso,
+				recorridoMasVecesRealizado);
+
+		return resultado;
+	}
+
+	public String getYML(Object obj) {
+
+		Yaml yaml = new Yaml();
+		String textoYML = yaml.dump(obj);
+
+		return textoYML;
 	}
 
 }

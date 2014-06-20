@@ -17,6 +17,19 @@ public class Recorrido {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + destinoestacionid;
+		result = prime * result
+				+ ((destinonombre == null) ? 0 : destinonombre.hashCode());
+		result = prime * result + origenestacionid;
+		result = prime * result
+				+ ((origennombre == null) ? 0 : origennombre.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -40,6 +53,38 @@ public class Recorrido {
 		} else if (!origennombre.equals(other.origennombre))
 			return false;
 		return true;
+	}
+
+	public int getOrigenestacionid() {
+		return origenestacionid;
+	}
+
+	public void setOrigenestacionid(int origenestacionid) {
+		this.origenestacionid = origenestacionid;
+	}
+
+	public int getDestinoestacionid() {
+		return destinoestacionid;
+	}
+
+	public void setDestinoestacionid(int destinoestacionid) {
+		this.destinoestacionid = destinoestacionid;
+	}
+
+	public String getOrigennombre() {
+		return origennombre;
+	}
+
+	public void setOrigennombre(String origennombre) {
+		this.origennombre = origennombre;
+	}
+
+	public String getDestinonombre() {
+		return destinonombre;
+	}
+
+	public void setDestinonombre(String destinonombre) {
+		this.destinonombre = destinonombre;
 	}
 
 }
