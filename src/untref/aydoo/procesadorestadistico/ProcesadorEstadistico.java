@@ -22,7 +22,8 @@ public class ProcesadorEstadistico {
 	private Map<Integer, Bicicleta> bicicletas;
 	private Map<String, Recorrido> recorridos;
 
-	public static void main(String[] args) throws IOException, ParseException, ZipException {
+	public static void main(String[] args) throws IOException, ParseException,
+			ZipException {
 
 		for (int i = 0; i < args.length; i++) {
 
@@ -39,6 +40,7 @@ public class ProcesadorEstadistico {
 		}
 
 		if (!daemon) {
+
 			ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
 			procesadorEstadistico.procesarRegistros(new File(directorio));
 		}
