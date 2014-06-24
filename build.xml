@@ -56,7 +56,7 @@
 			<classpath location="${instrumented.dir}" />
 			<classpath location="${build}" />
 			<classpath refid="cobertura.classpath" />
-			<classpath refid="classpath" />
+<!--			<classpath refid="classpath" /> -->
 			<formatter type="xml" />
 			<test name="${testcase}" todir="${reports.xml.dir}" if="testcase" />
 			<batchtest todir="${reports.xml.dir}" unless="testcase">
