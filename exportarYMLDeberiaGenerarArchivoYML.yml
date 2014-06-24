@@ -1,0 +1,10 @@
+!!untref.aydoo.procesadorestadistico.Resultado
+bicicletaUtilizadaMasVeces:
+  id: 1235
+  viajes: !!set {}
+bicicletaUtilizadaMenosVeces:
+  id: 1102
+  viajes: !!set {}
+recorridoMasVecesRealizado: {destinoestacionid: 8, destinonombre: PLAZA ITALIA, origenestacionid: 8,
+  origennombre: PLAZA ITALIA}
+tiempoPromedioDeUso: 28.2811

@@ -81,7 +81,7 @@ public class ProcesadorEstadisticoTest {
 
 			Main.main(args);
 
-		} catch (IOException | ParseException | ZipException e) {
+		} catch (IOException | ParseException | ZipException | InterruptedException e) {
 
 			Assert.assertEquals(ZipException.class, e.getClass());
 		}
@@ -98,7 +98,8 @@ public class ProcesadorEstadisticoTest {
 
 			Main.main(args);
 
-		} catch (IOException | ParseException | ZipException e) {
+		} catch (IOException | ParseException | ZipException
+				| InterruptedException e) {
 
 			Assert.assertEquals(FileNotFoundException.class, e.getClass());
 		}

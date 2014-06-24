@@ -129,4 +129,21 @@ public class ManejadorDeArchivos {
 		writer.close();
 	}
 
+	public Set<File> listarZIPs() {
+
+		File[] listaDeArchivos = directorio.listFiles();
+		Set<File> listaDeZIPs = new HashSet<File>();
+
+		for (int i = 0; i < listaDeArchivos.length; i++) {
+
+			if (listaDeArchivos[i].isFile()
+					&& listaDeArchivos[i].getName().endsWith(".zip")) {
+
+				listaDeZIPs.add(listaDeArchivos[i]);
+			}
+		}
+
+		return listaDeZIPs;
+	}
+
 }

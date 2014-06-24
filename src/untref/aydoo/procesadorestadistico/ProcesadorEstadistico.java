@@ -263,31 +263,41 @@ public class ProcesadorEstadistico {
 		this.manejadorDeArchivos.exportarYML(yml, archivo);
 	}
 
-	public void startDaemon() throws IOException, ParseException, ZipException {
+	public void procesarRegistrosComoDaemon() throws IOException,
+			ParseException, ZipException {
 
-		File[] listaDeArchivos = directorio.listFiles();
+		Set<File> listaDeZIPs = this.manejadorDeArchivos.listarZIPs();
 
-		for (int i = 0; i < listaDeArchivos.length; i++) {
+		Iterator<File> iterador = listaDeZIPs.iterator();
 
-			if (listaDeArchivos[i].isFile()
-					&& listaDeArchivos[i].getName().endsWith(".zip")) {
+		while (iterador.hasNext()) {
 
-				this.registros.addAll(this.manejadorDeArchivos
-						.procesarZIP(listaDeArchivos[i]));
-				Resultado resultado = this.getResultado();
-				String yml = this.getYML(resultado);
-				this.exportarYML(
-						yml,
-						directorio
-								+ "/"
-								+ listaDeArchivos[i].getName()
-										.subSequence(
-												0,
-												listaDeArchivos[i].getName()
-														.length() - 4) + ".yml");
-				this.clearData();
-			}
+			File zipFile = iterador.next();
+
+			this.registros
+					.addAll(this.manejadorDeArchivos.procesarZIP(zipFile));
+			Resultado resultado = this.getResultado();
+			String yml = this.getYML(resultado);
+			this.exportarYML(
+					yml,
+					directorio
+							+ "/"
+							+ zipFile.getName().subSequence(0,
+									zipFile.getName().length() - 4) + ".yml");
+			this.clearData();
 		}
+
+	}
+
+	public void restartDaemon() throws InterruptedException, IOException,
+			ParseException, ZipException {
+
+		procesarRegistrosComoDaemon();
+
+		// Espera 1 segundo.
+		Thread.sleep(1000);
+
+		restartDaemon();
 	}
 
 	private void clearData() {

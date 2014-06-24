@@ -11,7 +11,7 @@ public class Main {
 	private static ProcesadorEstadistico procesadorEstadistico;
 
 	public static void main(String[] args) throws IOException, ParseException,
-			ZipException {
+			ZipException, InterruptedException {
 
 		String directorio = null;
 
@@ -41,7 +41,7 @@ public class Main {
 		if (!testing) {
 			if (daemon) {
 
-				procesadorEstadistico.startDaemon();
+				procesadorEstadistico.restartDaemon();
 
 			} else {
 
