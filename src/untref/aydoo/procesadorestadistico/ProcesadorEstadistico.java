@@ -172,17 +172,6 @@ public class ProcesadorEstadistico {
 
 		Map<Recorrido, Integer> mapaVecesRealizado = new HashMap<Recorrido, Integer>();
 
-		// Inicialización del mapa.
-
-		Iterator<Recorrido> iteradorRecorrido = recorridos.values().iterator();
-
-		while (iteradorRecorrido.hasNext()) {
-
-			Recorrido recorrido = iteradorRecorrido.next();
-
-			mapaVecesRealizado.put(recorrido, 0);
-		}
-
 		// Asignación de cantidad de recorridos.
 
 		Iterator<Bicicleta> iteradorBicicletas = this.bicicletas.values()
@@ -198,9 +187,17 @@ public class ProcesadorEstadistico {
 
 				Viaje viaje = iteradorViajes.next();
 
-				int vecesRealizado = mapaVecesRealizado.get(viaje
-						.getRecorrido()) + 1;
-				mapaVecesRealizado.put(viaje.getRecorrido(), vecesRealizado);
+				if (mapaVecesRealizado.containsKey(viaje.getRecorrido())) {
+
+					int vecesRealizado = mapaVecesRealizado.get(viaje
+							.getRecorrido()) + 1;
+					mapaVecesRealizado
+							.put(viaje.getRecorrido(), vecesRealizado);
+
+				} else {
+
+					mapaVecesRealizado.put(viaje.getRecorrido(), 1);
+				}
 			}
 		}
 
@@ -213,7 +210,8 @@ public class ProcesadorEstadistico {
 		int vecesRealizado = 0;
 		int maximo = 0;
 
-		iteradorRecorrido = mapaVecesRealizado.keySet().iterator();
+		Iterator<Recorrido> iteradorRecorrido = mapaVecesRealizado.keySet()
+				.iterator();
 
 		while (iteradorRecorrido.hasNext()) {
 
@@ -256,8 +254,8 @@ public class ProcesadorEstadistico {
 		return textoYML;
 	}
 
-	public void exportarYML(String yml, String archivo) throws FileNotFoundException,
-			UnsupportedEncodingException {
+	public void exportarYML(String yml, String archivo)
+			throws FileNotFoundException, UnsupportedEncodingException {
 
 		this.manejadorDeArchivos.exportarYML(yml, archivo);
 	}
