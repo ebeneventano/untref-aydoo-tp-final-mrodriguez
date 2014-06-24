@@ -75,23 +75,7 @@ public class ProcesadorEstadisticoTest {
 	@Test
 	public void isDaemonDeberiaRetornarTrueSiEspecificadoEnLineaDeComandos() {
 
-		String[] args = { "entradas", "-d", "-t" };
-
-		try {
-
-			Main.main(args);
-
-		} catch (IOException | ParseException | ZipException | InterruptedException e) {
-
-			Assert.assertEquals(ZipException.class, e.getClass());
-			Assert.assertTrue(Main.getProcesadorEstadistico().isDaemon());
-		}
-	}
-
-	@Test
-	public void isDaemonDeberiaRetornarFalseSiNoEspecificadoEnLineaDeComandos() {
-
-		String[] args = { "entradas", "--on-demand", "-t" };
+		String[] args = { "entradas", "--daemon", "--testing" };
 
 		try {
 
@@ -100,9 +84,28 @@ public class ProcesadorEstadisticoTest {
 		} catch (IOException | ParseException | ZipException
 				| InterruptedException e) {
 
-			Assert.assertEquals(FileNotFoundException.class, e.getClass());
-			Assert.assertFalse(Main.getProcesadorEstadistico().isDaemon());
+			Assert.fail();
 		}
+
+		Assert.assertTrue(Main.getProcesadorEstadistico().isDaemon());
+	}
+
+	@Test
+	public void isDaemonDeberiaRetornarFalseSiNoEspecificadoEnLineaDeComandos() {
+
+		String[] args = { "entradas", "--on-demand", "--testing" };
+
+		try {
+
+			Main.main(args);
+
+		} catch (IOException | ParseException | ZipException
+				| InterruptedException e) {
+
+			Assert.fail();
+		}
+
+		Assert.assertFalse(Main.getProcesadorEstadistico().isDaemon());
 	}
 
 	@Test
