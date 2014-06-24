@@ -1,6 +1,5 @@
 package untref.aydoo.procesadorestadistico;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -36,15 +35,22 @@ public class Main {
 			}
 		}
 
-		procesadorEstadistico = new ProcesadorEstadistico();
+		procesadorEstadistico = new ProcesadorEstadistico(directorio);
 		procesadorEstadistico.setDaemon(daemon);
 
-		if (!daemon && !testing) {
+		if (!testing) {
+			if (daemon) {
 
-			procesadorEstadistico.procesarRegistros(new File(directorio));
-			Resultado resultado = procesadorEstadistico.getResultado();
-			String yml = procesadorEstadistico.getYML(resultado);
-			procesadorEstadistico.exportarYML(yml, directorio + "/" + salida);
+				procesadorEstadistico.startDaemon();
+
+			} else {
+
+				procesadorEstadistico.procesarRegistros();
+				Resultado resultado = procesadorEstadistico.getResultado();
+				String yml = procesadorEstadistico.getYML(resultado);
+				procesadorEstadistico.exportarYML(yml, directorio + "/"
+						+ salida);
+			}
 		}
 	}
 

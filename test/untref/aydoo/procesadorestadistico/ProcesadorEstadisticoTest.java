@@ -17,10 +17,10 @@ public class ProcesadorEstadisticoTest {
 	public void getBicicletaUtilizadaMasVecesDeberiaRetornarBicicletaCalculada()
 			throws IOException, ParseException, ZipException {
 
-		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File directorio = new File("entradas");
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
+				"entradas");
 
-		procesadorEstadistico.procesarRegistros(directorio);
+		procesadorEstadistico.procesarRegistros();
 		Bicicleta bicicleta = procesadorEstadistico
 				.getBicicletaUtilizadaMasVeces();
 
@@ -31,10 +31,10 @@ public class ProcesadorEstadisticoTest {
 	public void getBicicletaUtilizadaMenosVecesDeberiaRetornarBicicletaCalculada()
 			throws IOException, ParseException, ZipException {
 
-		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File directorio = new File("entradas");
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
+				"entradas");
 
-		procesadorEstadistico.procesarRegistros(directorio);
+		procesadorEstadistico.procesarRegistros();
 		Bicicleta bicicleta = procesadorEstadistico
 				.getBicicletaUtilizadaMenosVeces();
 
@@ -45,10 +45,10 @@ public class ProcesadorEstadisticoTest {
 	public void getTiempoPromedioDeUsoDeberiaRetornarValorCalculado()
 			throws IOException, ParseException, ZipException {
 
-		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File directorio = new File("entradas");
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
+				"entradas");
 
-		procesadorEstadistico.procesarRegistros(directorio);
+		procesadorEstadistico.procesarRegistros();
 		double tiempoPromedioDeUso = procesadorEstadistico
 				.getTiempoPromedioDeUso();
 
@@ -59,10 +59,10 @@ public class ProcesadorEstadisticoTest {
 	public void getRecorridoMasVecesRealizadoDeberiaRetornarRecorridoCalculado()
 			throws IOException, ParseException, ZipException {
 
-		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File directorio = new File("entradas");
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
+				"entradas");
 
-		procesadorEstadistico.procesarRegistros(directorio);
+		procesadorEstadistico.procesarRegistros();
 		Recorrido recorrido = procesadorEstadistico
 				.getRecorridoMasVecesRealizado();
 
@@ -110,10 +110,10 @@ public class ProcesadorEstadisticoTest {
 	public void getResultadoDeberiaRetornarResultadoCalculado()
 			throws IOException, ParseException, ZipException {
 
-		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File directorio = new File("entradas");
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
+				"entradas");
 
-		procesadorEstadistico.procesarRegistros(directorio);
+		procesadorEstadistico.procesarRegistros();
 
 		Bicicleta bicicletaMasUsada = new Bicicleta(1235);
 		Bicicleta bicicletaMenosUsada = new Bicicleta(1102);
@@ -131,7 +131,8 @@ public class ProcesadorEstadisticoTest {
 	@Test
 	public void getYMLDeberiaRetornarStringCalculada() {
 
-		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
+				"entradas");
 
 		Bicicleta bicicletaMasUsada = new Bicicleta(1235);
 		Bicicleta bicicletaMenosUsada = new Bicicleta(1102);
@@ -161,7 +162,8 @@ public class ProcesadorEstadisticoTest {
 	public void exportarYMLDeberiaGenerarArchivoYML()
 			throws FileNotFoundException, UnsupportedEncodingException {
 
-		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
+				"entradas");
 
 		Bicicleta bicicletaMasUsada = new Bicicleta(1235);
 		Bicicleta bicicletaMenosUsada = new Bicicleta(1102);

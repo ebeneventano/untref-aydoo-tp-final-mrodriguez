@@ -18,13 +18,15 @@ public class ProcesadorEstadistico {
 
 	private boolean daemon;
 
+	private File directorio;
 	private ManejadorDeArchivos manejadorDeArchivos;
 	private Set<Registro> registros;
 	private Map<Integer, Bicicleta> bicicletas;
 	private Map<String, Recorrido> recorridos;
 
-	public ProcesadorEstadistico() {
+	public ProcesadorEstadistico(String directorio) {
 
+		this.directorio = new File(directorio);
 		this.manejadorDeArchivos = new ManejadorDeArchivos();
 		this.bicicletas = new HashMap<Integer, Bicicleta>();
 		this.recorridos = new HashMap<String, Recorrido>();
@@ -40,10 +42,10 @@ public class ProcesadorEstadistico {
 		return daemon;
 	}
 
-	public void procesarRegistros(File archivo) throws IOException,
-			ParseException, ZipException {
+	public void procesarRegistros() throws IOException, ParseException,
+			ZipException {
 
-		this.registros = this.manejadorDeArchivos.cargarRegistros(archivo);
+		this.registros = this.manejadorDeArchivos.cargarRegistros(directorio);
 
 		Iterator<Registro> iterador = this.registros.iterator();
 
@@ -258,6 +260,40 @@ public class ProcesadorEstadistico {
 			throws FileNotFoundException, UnsupportedEncodingException {
 
 		this.manejadorDeArchivos.exportarYML(yml, archivo);
+	}
+
+	public void startDaemon() throws IOException, ParseException, ZipException {
+
+		File[] listaDeArchivos = directorio.listFiles();
+
+		for (int i = 0; i < listaDeArchivos.length; i++) {
+
+			if (listaDeArchivos[i].isFile()
+					&& listaDeArchivos[i].getName().endsWith(".zip")) {
+
+				this.registros.addAll(this.manejadorDeArchivos
+						.procesarZIP(listaDeArchivos[i]));
+				Resultado resultado = this.getResultado();
+				String yml = this.getYML(resultado);
+				this.exportarYML(
+						yml,
+						directorio
+								+ "/"
+								+ listaDeArchivos[i].getName()
+										.subSequence(
+												0,
+												listaDeArchivos[i].getName()
+														.length() - 4) + ".yml");
+				this.clearData();
+			}
+		}
+	}
+
+	private void clearData() {
+
+		this.registros.clear();
+		this.bicicletas.clear();
+		this.recorridos.clear();
 	}
 
 }

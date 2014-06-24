@@ -39,9 +39,20 @@ public class ManejadorDeArchivos {
 			if (listaDeArchivos[i].isFile()
 					&& listaDeArchivos[i].getName().endsWith(".zip")) {
 
-				this.descomprimirZIP(listaDeArchivos[i]);
+				registros.addAll(this.procesarZIP(listaDeArchivos[i]));
 			}
 		}
+
+		return registros;
+	}
+
+	public Set<Registro> procesarZIP(File zip) throws IOException,
+			ParseException, ZipException {
+
+		File[] listaDeArchivos;
+		Set<Registro> registros = new HashSet<Registro>();
+
+		this.descomprimirZIP(zip);
 
 		listaDeArchivos = directorio.listFiles();
 
