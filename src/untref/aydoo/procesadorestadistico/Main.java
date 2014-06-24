@@ -10,7 +10,6 @@ public class Main {
 	private static String directorio;
 	private static boolean daemon, testing;
 	private static ProcesadorEstadistico procesadorEstadistico;
-	private static String salida = "salida.yml";
 
 	public static void main(String[] args) throws IOException, ParseException,
 			ZipException {
@@ -45,11 +44,7 @@ public class Main {
 
 			} else {
 
-				procesadorEstadistico.procesarRegistros();
-				Resultado resultado = procesadorEstadistico.getResultado();
-				String yml = procesadorEstadistico.getYML(resultado);
-				procesadorEstadistico.exportarYML(yml, directorio + "/"
-						+ salida);
+				procesadorEstadistico.onDemand();
 			}
 		}
 	}

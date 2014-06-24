@@ -19,6 +19,7 @@ public class ProcesadorEstadistico {
 	private boolean daemon;
 
 	private File directorio;
+	private String salida = "salida.yml";
 	private ManejadorDeArchivos manejadorDeArchivos;
 	private Set<Registro> registros;
 	private Map<Integer, Bicicleta> bicicletas;
@@ -294,6 +295,14 @@ public class ProcesadorEstadistico {
 		this.registros.clear();
 		this.bicicletas.clear();
 		this.recorridos.clear();
+	}
+
+	public void onDemand() throws IOException, ParseException, ZipException {
+
+		this.procesarRegistros();
+		Resultado resultado = this.getResultado();
+		String yml = this.getYML(resultado);
+		this.exportarYML(yml, directorio + "/" + this.salida);
 	}
 
 }
