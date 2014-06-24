@@ -8,11 +8,13 @@ public class BicicletaTest {
 	@Test
 	public void getIdDeberiaRetornarIdSeteado() {
 
-		int id = 123;
+		int idEsperado = 123;
 
-		Bicicleta bicicleta = new Bicicleta(id);
+		Bicicleta bicicleta = new Bicicleta(idEsperado);
+		
+		int id = bicicleta.getId();
 
-		Assert.assertEquals(id, bicicleta.getId());
+		Assert.assertEquals(idEsperado, id);
 	}
 
 }
