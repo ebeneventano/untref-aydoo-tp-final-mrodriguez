@@ -111,6 +111,8 @@ public class ManejadorDeArchivos {
 		}
 
 		reader.close();
+		
+		archivo.delete();
 
 		return registros;
 	}

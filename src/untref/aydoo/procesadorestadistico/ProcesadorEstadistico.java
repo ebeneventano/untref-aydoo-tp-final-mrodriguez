@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -24,6 +25,7 @@ public class ProcesadorEstadistico {
 	private Set<Registro> registros;
 	private Map<Integer, Bicicleta> bicicletas;
 	private Map<String, Recorrido> recorridos;
+	private Set<File> zipsYaProcesados;
 
 	public ProcesadorEstadistico(String directorio) {
 
@@ -31,6 +33,7 @@ public class ProcesadorEstadistico {
 		this.manejadorDeArchivos = new ManejadorDeArchivos();
 		this.bicicletas = new HashMap<Integer, Bicicleta>();
 		this.recorridos = new HashMap<String, Recorrido>();
+		this.zipsYaProcesados = new HashSet<File>();
 	}
 
 	public void setDaemon(boolean daemon) {
@@ -274,19 +277,22 @@ public class ProcesadorEstadistico {
 
 			File zipFile = iterador.next();
 
-			this.registros
-					.addAll(this.manejadorDeArchivos.procesarZIP(zipFile));
-			Resultado resultado = this.getResultado();
-			String yml = this.getYML(resultado);
-			this.exportarYML(
-					yml,
-					directorio
-							+ "/"
-							+ zipFile.getName().subSequence(0,
-									zipFile.getName().length() - 4) + ".yml");
-			this.clearData();
+			if (!zipsYaProcesados.contains(zipFile)) {
+				this.registros.addAll(this.manejadorDeArchivos
+						.procesarZIP(zipFile));
+				Resultado resultado = this.getResultado();
+				String yml = this.getYML(resultado);
+				this.exportarYML(
+						yml,
+						directorio
+								+ "/"
+								+ zipFile.getName().subSequence(0,
+										zipFile.getName().length() - 4)
+								+ ".yml");
+				this.zipsYaProcesados.add(zipFile);
+				this.clearData();
+			}
 		}
-
 	}
 
 	public void restartDaemon() throws InterruptedException, IOException,

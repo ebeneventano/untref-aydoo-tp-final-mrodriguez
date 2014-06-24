@@ -84,9 +84,8 @@ public class ProcesadorEstadisticoTest {
 		} catch (IOException | ParseException | ZipException | InterruptedException e) {
 
 			Assert.assertEquals(ZipException.class, e.getClass());
+			Assert.assertTrue(Main.getProcesadorEstadistico().isDaemon());
 		}
-
-		Assert.assertTrue(Main.getProcesadorEstadistico().isDaemon());
 	}
 
 	@Test
@@ -102,9 +101,8 @@ public class ProcesadorEstadisticoTest {
 				| InterruptedException e) {
 
 			Assert.assertEquals(FileNotFoundException.class, e.getClass());
+			Assert.assertFalse(Main.getProcesadorEstadistico().isDaemon());
 		}
-
-		Assert.assertFalse(Main.getProcesadorEstadistico().isDaemon());
 	}
 
 	@Test
