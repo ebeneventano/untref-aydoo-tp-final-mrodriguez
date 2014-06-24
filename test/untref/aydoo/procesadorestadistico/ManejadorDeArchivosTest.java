@@ -19,23 +19,25 @@ public class ManejadorDeArchivosTest {
 			throws IOException, ParseException, ZipException {
 
 		ManejadorDeArchivos manejadorDeArchivos = new ManejadorDeArchivos();
-		File archivo = new File("test.zip");
+		File directorio = new File("entradas");
 
-		Set<Registro> registros = manejadorDeArchivos.cargarRegistros(archivo);
+		Set<Registro> registros = manejadorDeArchivos
+				.cargarRegistros(directorio);
 
-		Assert.assertTrue(10000 == registros.size());
+		Assert.assertEquals(10000, registros.size());
 	}
 
 	@Test
-	public void cararRegistrosDeberiaGenerarRegistroCorrectamente()
+	public void cargarRegistrosDeberiaGenerarRegistroCorrectamente()
 			throws IOException, ParseException, ZipException {
 
 		ManejadorDeArchivos manejadorDeArchivos = new ManejadorDeArchivos();
-		File archivo = new File("test.zip");
+		File directorio = new File("entradas");
 		SimpleDateFormat dateParser = new SimpleDateFormat(
 				"yyyy-mm-dd hh:mm:ss");
 
-		Set<Registro> registros = manejadorDeArchivos.cargarRegistros(archivo);
+		Set<Registro> registros = manejadorDeArchivos
+				.cargarRegistros(directorio);
 
 		Date origenfecha = dateParser.parse("2013-01-02 07:49:52.937");
 		Date destinofecha = dateParser.parse("2013-01-02 08:11:36.67");

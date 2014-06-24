@@ -1,6 +1,8 @@
 package untref.aydoo.procesadorestadistico;
 
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -19,18 +21,47 @@ public class ManejadorDeArchivos {
 	private CSVReader reader;
 	private SimpleDateFormat dateParser = new SimpleDateFormat(
 			"yyyy-mm-dd hh:mm:ss");
+	private File directorio;
 
-	public Set<Registro> cargarRegistros(File archivo) throws IOException,
-			ParseException, ZipException {
+	public Set<Registro> cargarRegistros(File directorio) throws ZipException,
+			IOException, ParseException {
 
-		this.descomprimirZIPs(archivo);
+		this.directorio = directorio;
+
+		File[] listaDeArchivos;
+		Set<Registro> registros = new HashSet<Registro>();
+
+		listaDeArchivos = directorio.listFiles();
+
+		for (int i = 0; i < listaDeArchivos.length; i++) {
+
+			if (listaDeArchivos[i].isFile()
+					&& listaDeArchivos[i].getName().endsWith(".zip")) {
+
+				this.descomprimirZIP(listaDeArchivos[i]);
+			}
+		}
+
+		listaDeArchivos = directorio.listFiles();
+
+		for (int i = 0; i < listaDeArchivos.length; i++) {
+
+			if (listaDeArchivos[i].isFile()
+					&& listaDeArchivos[i].getName().endsWith(".csv")) {
+
+				registros.addAll(this.leerCSV(listaDeArchivos[i]));
+			}
+		}
+
+		return registros;
+	}
+
+	private Set<Registro> leerCSV(File archivo) throws IOException,
+			ParseException {
 
 		Set<Registro> registros = new HashSet<Registro>();
 
-		String archivoCSV = archivo.getName().substring(0,
-				archivo.getName().length() - 4)
-				+ ".csv";
-		reader = new CSVReader(new FileReader(archivoCSV), ';');
+		reader = new CSVReader(new FileReader(archivo), ';');
 
 		reader.readNext(); // header
 
@@ -46,7 +77,16 @@ public class ManejadorDeArchivos {
 			Date origenfecha = dateParser.parse(nextLine[2]);
 			Date destinofecha = dateParser.parse(nextLine[5]);
 
-			int tiempouso = Integer.parseInt(nextLine[8]);
+			int tiempouso;
+
+			if (nextLine[8].length() > 0) {
+
+				tiempouso = Integer.parseInt(nextLine[8]);
+
+			} else {
+
+				tiempouso = 0;
+			}
 
 			String origennombre = nextLine[4];
 			String destinonombre = nextLine[7];
@@ -63,10 +103,10 @@ public class ManejadorDeArchivos {
 		return registros;
 	}
 
-	private void descomprimirZIPs(File archivo) throws ZipException {
+	private void descomprimirZIP(File archivo) throws ZipException {
 
 		ZipFile zipFile = new ZipFile(archivo);
-		zipFile.extractAll(".");
+		zipFile.extractAll(directorio.getPath());
 	}
 
 }
