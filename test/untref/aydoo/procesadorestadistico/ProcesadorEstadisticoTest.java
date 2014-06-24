@@ -75,7 +75,7 @@ public class ProcesadorEstadisticoTest {
 	@Test
 	public void isDaemonDeberiaRetornarTrueSiEspecificadoEnLineaDeComandos() {
 
-		String[] args = { "entradas", "-d" };
+		String[] args = { "entradas", "-d", "-t" };
 
 		try {
 
@@ -92,7 +92,7 @@ public class ProcesadorEstadisticoTest {
 	@Test
 	public void isDaemonDeberiaRetornarFalseSiNoEspecificadoEnLineaDeComandos() {
 
-		String[] args = { "entradas" };
+		String[] args = { "entradas", "--on-demand", "-t" };
 
 		try {
 
@@ -174,10 +174,11 @@ public class ProcesadorEstadisticoTest {
 
 		String string = procesadorEstadistico.getYML(resultado);
 
-		procesadorEstadistico.exportarYML(string, "exportarYMLDeberiaGenerarArchivoYML.yml");
+		procesadorEstadistico.exportarYML(string,
+				"exportarYMLDeberiaGenerarArchivoYML.yml");
 
 		File archivo = new File("exportarYMLDeberiaGenerarArchivoYML.yml");
-		
+
 		Assert.assertTrue(archivo.isFile());
 	}
 }

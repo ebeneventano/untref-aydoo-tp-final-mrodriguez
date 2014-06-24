@@ -9,7 +9,7 @@ import net.lingala.zip4j.exception.ZipException;
 public class Main {
 
 	private static String directorio;
-	private static boolean daemon;
+	private static boolean daemon, testing;
 	private static ProcesadorEstadistico procesadorEstadistico;
 	private static String salida = "salida.yml";
 
@@ -27,21 +27,24 @@ public class Main {
 				} else {
 					daemon = false;
 				}
+			case 2:
+				if ((args[i] == "-t")) {
+					testing = true;
+				} else {
+					testing = false;
+				}
 			}
 		}
 
 		procesadorEstadistico = new ProcesadorEstadistico();
+		procesadorEstadistico.setDaemon(daemon);
 
-		if (!daemon) {
+		if (!daemon && !testing) {
 
 			procesadorEstadistico.procesarRegistros(new File(directorio));
 			Resultado resultado = procesadorEstadistico.getResultado();
 			String yml = procesadorEstadistico.getYML(resultado);
 			procesadorEstadistico.exportarYML(yml, directorio + "/" + salida);
-
-		} else {
-
-			procesadorEstadistico.setDaemon(daemon);
 		}
 	}
 
