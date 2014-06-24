@@ -11,7 +11,7 @@ public class BicicletaTest {
 		int idEsperado = 123;
 
 		Bicicleta bicicleta = new Bicicleta(idEsperado);
-		
+
 		int id = bicicleta.getId();
 
 		Assert.assertEquals(idEsperado, id);

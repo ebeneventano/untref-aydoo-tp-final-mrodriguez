@@ -10,7 +10,7 @@ public class Resultado {
 	public Resultado(Bicicleta bicicletaUtilizadaMasVeces,
 			Bicicleta bicicletaUtilizadaMenosVeces, double tiempoPromedioDeUso,
 			Recorrido recorridoMasVecesRealizado) {
-		super();
+
 		this.bicicletaUtilizadaMasVeces = bicicletaUtilizadaMasVeces;
 		this.bicicletaUtilizadaMenosVeces = bicicletaUtilizadaMenosVeces;
 		this.tiempoPromedioDeUso = tiempoPromedioDeUso;

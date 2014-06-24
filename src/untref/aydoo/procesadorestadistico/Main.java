@@ -7,12 +7,13 @@ import net.lingala.zip4j.exception.ZipException;
 
 public class Main {
 
-	private static String directorio;
 	private static boolean daemon, testing;
 	private static ProcesadorEstadistico procesadorEstadistico;
 
 	public static void main(String[] args) throws IOException, ParseException,
 			ZipException {
+
+		String directorio = null;
 
 		for (int i = 0; i < args.length; i++) {
 
