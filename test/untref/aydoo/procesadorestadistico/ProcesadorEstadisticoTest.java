@@ -20,7 +20,7 @@ public class ProcesadorEstadisticoTest {
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
 				"entradas");
 
-		procesadorEstadistico.procesarRegistros();
+		procesadorEstadistico.procesarRegistrosOnDemand();
 		Bicicleta bicicleta = procesadorEstadistico
 				.getBicicletaUtilizadaMasVeces();
 
@@ -34,7 +34,7 @@ public class ProcesadorEstadisticoTest {
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
 				"entradas");
 
-		procesadorEstadistico.procesarRegistros();
+		procesadorEstadistico.procesarRegistrosOnDemand();
 		Bicicleta bicicleta = procesadorEstadistico
 				.getBicicletaUtilizadaMenosVeces();
 
@@ -48,7 +48,7 @@ public class ProcesadorEstadisticoTest {
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
 				"entradas");
 
-		procesadorEstadistico.procesarRegistros();
+		procesadorEstadistico.procesarRegistrosOnDemand();
 		double tiempoPromedioDeUso = procesadorEstadistico
 				.getTiempoPromedioDeUso();
 
@@ -62,7 +62,7 @@ public class ProcesadorEstadisticoTest {
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
 				"entradas");
 
-		procesadorEstadistico.procesarRegistros();
+		procesadorEstadistico.procesarRegistrosOnDemand();
 		Recorrido recorrido = procesadorEstadistico
 				.getRecorridoMasVecesRealizado();
 
@@ -114,7 +114,7 @@ public class ProcesadorEstadisticoTest {
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
 				"entradas");
 
-		procesadorEstadistico.procesarRegistros();
+		procesadorEstadistico.procesarRegistrosOnDemand();
 
 		Bicicleta bicicletaMasUsada = new Bicicleta(1235);
 		Bicicleta bicicletaMenosUsada = new Bicicleta(1102);

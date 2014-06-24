@@ -43,7 +43,7 @@ public class ProcesadorEstadistico {
 		return daemon;
 	}
 
-	public void procesarRegistros() throws IOException, ParseException,
+	public void procesarRegistrosOnDemand() throws IOException, ParseException,
 			ZipException {
 
 		this.registros = this.manejadorDeArchivos.cargarRegistros(directorio);
@@ -309,7 +309,7 @@ public class ProcesadorEstadistico {
 
 	public void onDemand() throws IOException, ParseException, ZipException {
 
-		this.procesarRegistros();
+		this.procesarRegistrosOnDemand();
 		Resultado resultado = this.getResultado();
 		String yml = this.getYML(resultado);
 		this.exportarYML(yml, directorio + "/" + this.salida);
