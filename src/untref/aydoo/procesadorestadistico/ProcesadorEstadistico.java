@@ -256,10 +256,10 @@ public class ProcesadorEstadistico {
 		return textoYML;
 	}
 
-	public void exportarYML(String yml) throws FileNotFoundException,
+	public void exportarYML(String yml, String archivo) throws FileNotFoundException,
 			UnsupportedEncodingException {
 
-		this.manejadorDeArchivos.exportarYML(yml);
+		this.manejadorDeArchivos.exportarYML(yml, archivo);
 	}
 
 }

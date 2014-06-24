@@ -3,6 +3,7 @@ package untref.aydoo.procesadorestadistico;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 
 import net.lingala.zip4j.exception.ZipException;
@@ -17,9 +18,9 @@ public class ProcesadorEstadisticoTest {
 			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File archivo = new File("entradas");
+		File directorio = new File("entradas");
 
-		procesadorEstadistico.procesarRegistros(archivo);
+		procesadorEstadistico.procesarRegistros(directorio);
 		Bicicleta bicicleta = procesadorEstadistico
 				.getBicicletaUtilizadaMasVeces();
 
@@ -31,9 +32,9 @@ public class ProcesadorEstadisticoTest {
 			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File archivo = new File("entradas");
+		File directorio = new File("entradas");
 
-		procesadorEstadistico.procesarRegistros(archivo);
+		procesadorEstadistico.procesarRegistros(directorio);
 		Bicicleta bicicleta = procesadorEstadistico
 				.getBicicletaUtilizadaMenosVeces();
 
@@ -45,9 +46,9 @@ public class ProcesadorEstadisticoTest {
 			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File archivo = new File("entradas");
+		File directorio = new File("entradas");
 
-		procesadorEstadistico.procesarRegistros(archivo);
+		procesadorEstadistico.procesarRegistros(directorio);
 		double tiempoPromedioDeUso = procesadorEstadistico
 				.getTiempoPromedioDeUso();
 
@@ -59,9 +60,9 @@ public class ProcesadorEstadisticoTest {
 			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File archivo = new File("entradas");
+		File directorio = new File("entradas");
 
-		procesadorEstadistico.procesarRegistros(archivo);
+		procesadorEstadistico.procesarRegistros(directorio);
 		Recorrido recorrido = procesadorEstadistico
 				.getRecorridoMasVecesRealizado();
 
@@ -110,9 +111,9 @@ public class ProcesadorEstadisticoTest {
 			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File archivo = new File("entradas");
+		File directorio = new File("entradas");
 
-		procesadorEstadistico.procesarRegistros(archivo);
+		procesadorEstadistico.procesarRegistros(directorio);
 
 		Bicicleta bicicletaMasUsada = new Bicicleta(1235);
 		Bicicleta bicicletaMenosUsada = new Bicicleta(1102);
@@ -154,5 +155,39 @@ public class ProcesadorEstadisticoTest {
 		String string = procesadorEstadistico.getYML(resultado);
 
 		Assert.assertEquals(stringEsperada, string);
+	}
+
+	@Test
+	public void exportarYMLDeberiaGenerarArchivoYML()
+			throws FileNotFoundException, UnsupportedEncodingException {
+
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
+
+		Bicicleta bicicletaMasUsada = new Bicicleta(1235);
+		Bicicleta bicicletaMenosUsada = new Bicicleta(1102);
+		double tiempoPromedio = 28.2811;
+		Recorrido recorridoEsperado = new Recorrido(8, 8, "PLAZA ITALIA",
+				"PLAZA ITALIA");
+
+		Resultado resultado = new Resultado(bicicletaMasUsada,
+				bicicletaMenosUsada, tiempoPromedio, recorridoEsperado);
+
+		String stringEsperada = "!!untref.aydoo.procesadorestadistico.Resultado\n"
+				+ "bicicletaUtilizadaMasVeces:\n"
+				+ "  id: 1235\n"
+				+ "  viajes: !!set {}\n"
+				+ "bicicletaUtilizadaMenosVeces:\n"
+				+ "  id: 1102\n"
+				+ "  viajes: !!set {}\n"
+				+ "recorridoMasVecesRealizado: {destinoestacionid: 8, destinonombre: PLAZA ITALIA, origenestacionid: 8,\n"
+				+ "  origennombre: PLAZA ITALIA}\n"
+				+ "tiempoPromedioDeUso: 28.2811\n";
+		String string = procesadorEstadistico.getYML(resultado);
+
+		procesadorEstadistico.exportarYML(string, "salida.yml");
+
+		File archivo = new File("salida.yml");
+		
+		Assert.assertTrue(archivo.isFile());
 	}
 }

@@ -23,7 +23,6 @@ public class ManejadorDeArchivos {
 	private SimpleDateFormat dateParser = new SimpleDateFormat(
 			"yyyy-mm-dd hh:mm:ss");
 	private File directorio;
-	private String salidaFilename = "salida.yml";
 
 	public Set<Registro> cargarRegistros(File directorio) throws ZipException,
 			IOException, ParseException {
@@ -111,11 +110,10 @@ public class ManejadorDeArchivos {
 		zipFile.extractAll(directorio.getPath());
 	}
 
-	public void exportarYML(String yml) throws FileNotFoundException,
-			UnsupportedEncodingException {
+	public void exportarYML(String yml, String archivo)
+			throws FileNotFoundException, UnsupportedEncodingException {
 
-		PrintWriter writer = new PrintWriter(this.directorio.getPath()
-				+ salidaFilename);
+		PrintWriter writer = new PrintWriter(archivo);
 		writer.print(yml);
 		writer.close();
 	}
