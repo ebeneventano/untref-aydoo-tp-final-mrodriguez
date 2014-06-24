@@ -75,7 +75,7 @@ public class ProcesadorEstadisticoTest {
 	@Test
 	public void isDaemonDeberiaRetornarTrueSiEspecificadoEnLineaDeComandos() {
 
-		String[] args = { "/", "-d" };
+		String[] args = { "entradas", "-d" };
 
 		try {
 
@@ -92,7 +92,7 @@ public class ProcesadorEstadisticoTest {
 	@Test
 	public void isDaemonDeberiaRetornarFalseSiNoEspecificadoEnLineaDeComandos() {
 
-		String[] args = { "/" };
+		String[] args = { "entradas" };
 
 		try {
 
@@ -172,21 +172,11 @@ public class ProcesadorEstadisticoTest {
 		Resultado resultado = new Resultado(bicicletaMasUsada,
 				bicicletaMenosUsada, tiempoPromedio, recorridoEsperado);
 
-		String stringEsperada = "!!untref.aydoo.procesadorestadistico.Resultado\n"
-				+ "bicicletaUtilizadaMasVeces:\n"
-				+ "  id: 1235\n"
-				+ "  viajes: !!set {}\n"
-				+ "bicicletaUtilizadaMenosVeces:\n"
-				+ "  id: 1102\n"
-				+ "  viajes: !!set {}\n"
-				+ "recorridoMasVecesRealizado: {destinoestacionid: 8, destinonombre: PLAZA ITALIA, origenestacionid: 8,\n"
-				+ "  origennombre: PLAZA ITALIA}\n"
-				+ "tiempoPromedioDeUso: 28.2811\n";
 		String string = procesadorEstadistico.getYML(resultado);
 
-		procesadorEstadistico.exportarYML(string, "salida.yml");
+		procesadorEstadistico.exportarYML(string, "exportarYMLDeberiaGenerarArchivoYML.yml");
 
-		File archivo = new File("salida.yml");
+		File archivo = new File("exportarYMLDeberiaGenerarArchivoYML.yml");
 		
 		Assert.assertTrue(archivo.isFile());
 	}
