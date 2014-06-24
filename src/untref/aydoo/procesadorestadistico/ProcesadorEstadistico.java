@@ -302,7 +302,7 @@ public class ProcesadorEstadistico {
 		// Espera 1 segundo.
 		Thread.sleep(1000);
 
-		// restartDaemon();
+		restartDaemon();
 	}
 
 	private void clearData() {
