@@ -1,10 +1,11 @@
 package untref.aydoo.procesadorestadistico;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,6 +23,7 @@ public class ManejadorDeArchivos {
 	private SimpleDateFormat dateParser = new SimpleDateFormat(
 			"yyyy-mm-dd hh:mm:ss");
 	private File directorio;
+	private String salidaFilename = "salida.yml";
 
 	public Set<Registro> cargarRegistros(File directorio) throws ZipException,
 			IOException, ParseException {
@@ -107,6 +109,15 @@ public class ManejadorDeArchivos {
 
 		ZipFile zipFile = new ZipFile(archivo);
 		zipFile.extractAll(directorio.getPath());
+	}
+
+	public void exportarYML(String yml) throws FileNotFoundException,
+			UnsupportedEncodingException {
+
+		PrintWriter writer = new PrintWriter(this.directorio.getPath()
+				+ salidaFilename);
+		writer.print(yml);
+		writer.close();
 	}
 
 }

@@ -17,7 +17,7 @@ public class ProcesadorEstadisticoTest {
 			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File archivo = new File("test.zip");
+		File archivo = new File("entradas");
 
 		procesadorEstadistico.procesarRegistros(archivo);
 		Bicicleta bicicleta = procesadorEstadistico
@@ -31,7 +31,7 @@ public class ProcesadorEstadisticoTest {
 			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File archivo = new File("test.zip");
+		File archivo = new File("entradas");
 
 		procesadorEstadistico.procesarRegistros(archivo);
 		Bicicleta bicicleta = procesadorEstadistico
@@ -45,7 +45,7 @@ public class ProcesadorEstadisticoTest {
 			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File archivo = new File("test.zip");
+		File archivo = new File("entradas");
 
 		procesadorEstadistico.procesarRegistros(archivo);
 		double tiempoPromedioDeUso = procesadorEstadistico
@@ -59,7 +59,7 @@ public class ProcesadorEstadisticoTest {
 			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File archivo = new File("test.zip");
+		File archivo = new File("entradas");
 
 		procesadorEstadistico.procesarRegistros(archivo);
 		Recorrido recorrido = procesadorEstadistico
@@ -99,7 +99,7 @@ public class ProcesadorEstadisticoTest {
 
 		} catch (IOException | ParseException | ZipException e) {
 
-			Assert.assertEquals(ZipException.class, e.getClass());
+			Assert.assertEquals(FileNotFoundException.class, e.getClass());
 		}
 
 		Assert.assertFalse(Main.getProcesadorEstadistico().isDaemon());
@@ -110,7 +110,7 @@ public class ProcesadorEstadisticoTest {
 			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-		File archivo = new File("test.zip");
+		File archivo = new File("entradas");
 
 		procesadorEstadistico.procesarRegistros(archivo);
 

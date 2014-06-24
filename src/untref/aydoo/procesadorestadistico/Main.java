@@ -34,6 +34,9 @@ public class Main {
 		if (!daemon) {
 
 			procesadorEstadistico.procesarRegistros(new File(directorio));
+			Resultado resultado = procesadorEstadistico.getResultado();
+			String yml = procesadorEstadistico.getYML(resultado);
+			procesadorEstadistico.exportarYML(yml);
 
 		} else {
 

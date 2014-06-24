@@ -1,7 +1,9 @@
 package untref.aydoo.procesadorestadistico;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,7 +31,7 @@ public class ProcesadorEstadistico {
 	}
 
 	public void setDaemon(boolean daemon) {
-		
+
 		this.daemon = daemon;
 	}
 
@@ -252,6 +254,12 @@ public class ProcesadorEstadistico {
 		String textoYML = yaml.dump(obj);
 
 		return textoYML;
+	}
+
+	public void exportarYML(String yml) throws FileNotFoundException,
+			UnsupportedEncodingException {
+
+		this.manejadorDeArchivos.exportarYML(yml);
 	}
 
 }
