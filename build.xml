@@ -50,7 +50,7 @@
 
 	<target name="ejecutar.tests" depends="compilar.tests">
 		<junit fork="yes" failureProperty="test.failure"  forkmode="once">
-			<!-- <classpath refid="classpath" /> -->
+			<classpath refid="classpath" />
 			<sysproperty key="net.sourceforge.cobertura.datafile"
 					file="${build}/cobertura.ser" />
 			<classpath location="${instrumented.dir}" />
