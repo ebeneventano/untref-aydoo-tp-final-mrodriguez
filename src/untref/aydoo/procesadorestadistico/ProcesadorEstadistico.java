@@ -19,7 +19,7 @@ public class ProcesadorEstadistico {
 
 	private boolean daemon;
 
-	private File directorio;
+	private String directorio;
 	private String salida = "salida.yml";
 	private ManejadorDeArchivos manejadorDeArchivos;
 	private Set<Registro> registros;
@@ -29,8 +29,8 @@ public class ProcesadorEstadistico {
 
 	public ProcesadorEstadistico(String directorio) {
 
-		this.directorio = new File(directorio);
-		this.manejadorDeArchivos = new ManejadorDeArchivos();
+		this.directorio = directorio;
+		this.manejadorDeArchivos = new ManejadorDeArchivos(directorio);
 		this.bicicletas = new HashMap<Integer, Bicicleta>();
 		this.recorridos = new HashMap<String, Recorrido>();
 		this.zipsYaProcesados = new HashSet<File>();
@@ -49,7 +49,7 @@ public class ProcesadorEstadistico {
 	public void procesarRegistrosOnDemand() throws IOException, ParseException,
 			ZipException {
 
-		this.registros = this.manejadorDeArchivos.cargarRegistros(directorio);
+		this.registros = this.manejadorDeArchivos.cargarRegistros();
 
 		Iterator<Registro> iterador = this.registros.iterator();
 
@@ -269,6 +269,7 @@ public class ProcesadorEstadistico {
 	public void procesarRegistrosComoDaemon() throws IOException,
 			ParseException, ZipException {
 
+		this.registros = new HashSet<Registro>();
 		Set<File> listaDeZIPs = this.manejadorDeArchivos.listarZIPs();
 
 		Iterator<File> iterador = listaDeZIPs.iterator();
@@ -282,13 +283,11 @@ public class ProcesadorEstadistico {
 						.procesarZIP(zipFile));
 				Resultado resultado = this.getResultado();
 				String yml = this.getYML(resultado);
-				this.exportarYML(
-						yml,
-						directorio
-								+ "/"
-								+ zipFile.getName().subSequence(0,
-										zipFile.getName().length() - 4)
-								+ ".yml");
+				String ymlFilePath = this.directorio
+						+ "/"
+						+ zipFile.getName().subSequence(0,
+								zipFile.getName().length() - 4) + ".yml";
+				this.exportarYML(yml, ymlFilePath);
 				this.zipsYaProcesados.add(zipFile);
 				this.clearData();
 			}
@@ -303,12 +302,11 @@ public class ProcesadorEstadistico {
 		// Espera 1 segundo.
 		Thread.sleep(1000);
 
-		restartDaemon();
+		// restartDaemon();
 	}
 
 	private void clearData() {
 
-		this.registros.clear();
 		this.bicicletas.clear();
 		this.recorridos.clear();
 	}

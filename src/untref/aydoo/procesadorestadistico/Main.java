@@ -21,13 +21,13 @@ public class Main {
 			case 0:
 				directorio = args[0];
 			case 1:
-				if (args[i] == "--daemon" || args[i] == "-d") {
+				if (args[i].equals("--daemon") || args[i].equals("-d")) {
 					daemon = true;
 				} else {
 					daemon = false;
 				}
 			case 2:
-				if ((args[i] == "--testing" || args[i] == "-t")) {
+				if ((args[i].equals("--testing") || args[i].equals("-t"))) {
 					testing = true;
 				} else {
 					testing = false;
@@ -39,7 +39,7 @@ public class Main {
 		procesadorEstadistico.setDaemon(daemon);
 
 		if (!testing) {
-			if (daemon) {
+			if (daemon == true) {
 
 				System.out.println("Iniciando daemon.");
 				procesadorEstadistico.restartDaemon();

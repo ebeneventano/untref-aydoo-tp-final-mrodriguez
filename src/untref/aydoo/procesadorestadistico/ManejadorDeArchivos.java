@@ -24,15 +24,18 @@ public class ManejadorDeArchivos {
 			"yyyy-mm-dd hh:mm:ss");
 	private File directorio;
 
-	public Set<Registro> cargarRegistros(File directorio) throws ZipException,
-			IOException, ParseException {
+	public ManejadorDeArchivos(String directorio) {
 
-		this.directorio = directorio;
+		this.directorio = new File(directorio);
+	}
+
+	public Set<Registro> cargarRegistros() throws ZipException, IOException,
+			ParseException {
 
 		File[] listaDeArchivos;
 		Set<Registro> registros = new HashSet<Registro>();
 
-		listaDeArchivos = directorio.listFiles();
+		listaDeArchivos = this.directorio.listFiles();
 
 		for (int i = 0; i < listaDeArchivos.length; i++) {
 
@@ -111,7 +114,7 @@ public class ManejadorDeArchivos {
 		}
 
 		reader.close();
-		
+
 		archivo.delete();
 
 		return registros;
