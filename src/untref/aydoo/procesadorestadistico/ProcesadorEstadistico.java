@@ -14,48 +14,28 @@ import net.lingala.zip4j.exception.ZipException;
 
 public class ProcesadorEstadistico {
 
-	private static boolean daemon;
+	private boolean daemon;
 
-	private static String directorio;
 	private ManejadorDeArchivos manejadorDeArchivos;
 	private Set<Registro> registros;
 	private Map<Integer, Bicicleta> bicicletas;
 	private Map<String, Recorrido> recorridos;
-
-	public static void main(String[] args) throws IOException, ParseException,
-			ZipException {
-
-		for (int i = 0; i < args.length; i++) {
-
-			switch (i) {
-			case 0:
-				directorio = args[0];
-			case 1:
-				if (args[i] == "-d") {
-					daemon = true;
-				} else {
-					daemon = false;
-				}
-			}
-		}
-
-		if (!daemon) {
-
-			ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico();
-			procesadorEstadistico.procesarRegistros(new File(directorio));
-		}
-	}
-
-	public static boolean isDaemon() {
-
-		return daemon;
-	}
 
 	public ProcesadorEstadistico() {
 
 		this.manejadorDeArchivos = new ManejadorDeArchivos();
 		this.bicicletas = new HashMap<Integer, Bicicleta>();
 		this.recorridos = new HashMap<String, Recorrido>();
+	}
+
+	public void setDaemon(boolean daemon) {
+		
+		this.daemon = daemon;
+	}
+
+	public boolean isDaemon() {
+
+		return daemon;
 	}
 
 	public void procesarRegistros(File archivo) throws IOException,

@@ -78,14 +78,14 @@ public class ProcesadorEstadisticoTest {
 
 		try {
 
-			ProcesadorEstadistico.main(args);
+			Main.main(args);
 
 		} catch (IOException | ParseException | ZipException e) {
 
 			Assert.assertEquals(ZipException.class, e.getClass());
 		}
 
-		Assert.assertTrue(ProcesadorEstadistico.isDaemon());
+		Assert.assertTrue(Main.getProcesadorEstadistico().isDaemon());
 	}
 
 	@Test
@@ -95,14 +95,14 @@ public class ProcesadorEstadisticoTest {
 
 		try {
 
-			ProcesadorEstadistico.main(args);
+			Main.main(args);
 
 		} catch (IOException | ParseException | ZipException e) {
 
 			Assert.assertEquals(ZipException.class, e.getClass());
 		}
 
-		Assert.assertFalse(ProcesadorEstadistico.isDaemon());
+		Assert.assertFalse(Main.getProcesadorEstadistico().isDaemon());
 	}
 
 	@Test
