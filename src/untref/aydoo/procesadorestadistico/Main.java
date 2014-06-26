@@ -15,6 +15,13 @@ public class Main {
 
 		String directorio = null;
 
+		if (args.length == 0) {
+
+			System.out
+					.println("Uso: java -jar procesadorEstadistico.jar [directorio] [-d | --daemon]");
+			return;
+		}
+
 		for (int i = 0; i < args.length; i++) {
 
 			switch (i) {
