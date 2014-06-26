@@ -9,16 +9,21 @@ Para recompilar la aplicación a JAR puede usar el script jar.sh
 
 ## Funcionamiento
 
+El directorio puede ser absoluto o relativo.
+
 ### Modo OnDemand
 
 ```shell
-# java -jar procesadorEstadistico.jar directorio/de/entradas
+# java -jar procesadorEstadistico.jar /directorio/de/entradas
 ```
 ```shell
-# java -jar procesadorEstadistico.jar directorio/de/entradas --on-demand
+# java -jar procesadorEstadistico.jar /directorio/de/entradas --on-demand
 ```
 
-El directorio puede ser absoluto o relativo.
+#### Ejemplo
+```shell
+# java -jar procesadorEstadistico.jar entradas/
+```
 
 ### Modo Daemon
 
@@ -27,6 +32,11 @@ El directorio puede ser absoluto o relativo.
 ```
 ```shell
 # java -jar procesadorEstadistico.jar directorio/de/entradas --daemon
+```
+
+#### Ejemplo
+```shell
+# java -jar procesadorEstadistico.jar entradas/ -d
 ```
 
 IMPORTANTE: Se debe respetar el órden de los triggers.
