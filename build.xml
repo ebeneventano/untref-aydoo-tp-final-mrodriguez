@@ -129,7 +129,7 @@
 	</target>
 
 	<target name="empaquetar" depends="compilar.paquete">
-		<jar destfile="${build}/dist/titiritero.jar" basedir="${build}/classes"/>
+		<jar destfile="${build}/dist/procesadorEstadistico.jar" basedir="${build}/classes" manifest="manifest.mf"/>
 	</target>
 
 	<target name="integracion-continua" depends="coverage-report" description="Ejecuta todas las tareas de integracion y genera los correspondientes reportes"/>
