@@ -76,16 +76,24 @@ public class ProcesadorEstadisticoTest {
 	public void isDaemonDeberiaRetornarTrueSiEspecificadoEnLineaDeComandos() {
 
 		String[] args = { "entradas", "--daemon", "--testing" };
-
+		
 		try {
-
 			Main.main(args);
-
-		} catch (IOException | ParseException | ZipException
-				| InterruptedException e) {
-
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Assert.fail();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			Assert.fail();
+		} catch (ZipException e) {
+			// TODO Auto-generated catch block
+			Assert.fail();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			Assert.fail();
 		}
+
+
 
 		Assert.assertTrue(Main.getProcesadorEstadistico().isDaemon());
 	}
@@ -96,14 +104,21 @@ public class ProcesadorEstadisticoTest {
 		String[] args = { "entradas", "--on-demand", "--testing" };
 
 		try {
-
 			Main.main(args);
-
-		} catch (IOException | ParseException | ZipException
-				| InterruptedException e) {
-
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Assert.fail();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			Assert.fail();
+		} catch (ZipException e) {
+			// TODO Auto-generated catch block
+			Assert.fail();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			Assert.fail();
 		}
+
 
 		Assert.assertFalse(Main.getProcesadorEstadistico().isDaemon());
 	}
@@ -186,4 +201,17 @@ public class ProcesadorEstadisticoTest {
 		Assert.assertTrue(archivo.isFile());
 	}
 	
+	@Test
+	public void getCantidadVecesBicicletaUtilizadaMasVeces()
+			throws IOException, ParseException, ZipException {
+
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
+				"entradas");
+
+		procesadorEstadistico.procesarRegistrosOnDemand();
+		Integer cantidadVeces = procesadorEstadistico
+				.getTiempoUsoDeBiciMasUtilizada();
+
+		Assert.assertEquals(Integer.valueOf(987), cantidadVeces);
+	}
 }
