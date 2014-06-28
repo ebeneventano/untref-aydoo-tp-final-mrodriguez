@@ -140,6 +140,32 @@ public class ProcesadorEstadistico {
 		}
 		return contadorTiempo;
 	}
+	
+	public Bicicleta getBicicletaUtilizadaMasTiempo() {
+
+		Iterator<Bicicleta> iterador = this.bicicletas.values().iterator();
+
+		Bicicleta bicicletaUtilizadaMasTiempo = null;
+
+		int maximo = 0;
+
+		while (iterador.hasNext()) {
+			int contadorTiempoUso = 0;
+
+			Bicicleta bicicleta = iterador.next();
+
+			for(Viaje unViaje : bicicleta.getViajes()){
+				contadorTiempoUso+=unViaje.getTiempouso();
+			}
+
+			if (contadorTiempoUso > maximo) {
+
+				maximo = contadorTiempoUso;
+				bicicletaUtilizadaMasTiempo = bicicleta;
+			}
+		}
+		return bicicletaUtilizadaMasTiempo;
+	}
 
 	public Bicicleta getBicicletaUtilizadaMenosVeces() {
 

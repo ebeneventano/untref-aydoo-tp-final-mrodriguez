@@ -214,4 +214,18 @@ public class ProcesadorEstadisticoTest {
 
 		Assert.assertEquals(Integer.valueOf(987), cantidadVeces);
 	}
+	
+	@Test
+	public void getBicicletaUtilizadaMasTiempo()
+			throws IOException, ParseException, ZipException {
+
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
+				"entradas");
+
+		procesadorEstadistico.procesarRegistrosOnDemand();
+		Bicicleta bicicletaMasTiempoUtilizada = procesadorEstadistico
+				.getBicicletaUtilizadaMasTiempo();
+
+		Assert.assertEquals(1524, bicicletaMasTiempoUtilizada.getId());
+	}
 }
