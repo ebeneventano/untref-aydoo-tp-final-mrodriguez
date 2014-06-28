@@ -304,7 +304,8 @@ public class ProcesadorEstadistico {
 		Resultado resultado = new Resultado(bicicletaUtilizadaMasVeces,
 				bicicletaUtilizadaMenosVeces, tiempoPromedioDeUso,
 				recorridoMasVecesRealizado);
-
+		resultado.setBicicletaUtilizadaMasTiempo(this.getBicicletaUtilizadaMasTiempo());
+		resultado.setTiempoUsoBicicletaMasUsada(this.getTiempoUsoDeBiciMasUtilizada());
 		return resultado;
 	}
 

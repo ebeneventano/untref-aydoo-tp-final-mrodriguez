@@ -6,6 +6,8 @@ public class Resultado {
 	private Bicicleta bicicletaUtilizadaMenosVeces;
 	private double tiempoPromedioDeUso;
 	private Recorrido recorridoMasVecesRealizado;
+	private Bicicleta bicicletaUtilizadaMasTiempo;
+	private Integer tiempoUsoBicicletaMasUsada;
 
 	public Resultado(Bicicleta bicicletaUtilizadaMasVeces,
 			Bicicleta bicicletaUtilizadaMenosVeces, double tiempoPromedioDeUso,
@@ -105,6 +107,23 @@ public class Resultado {
 				.doubleToLongBits(other.tiempoPromedioDeUso))
 			return false;
 		return true;
+	}
+
+	public void setBicicletaUtilizadaMasTiempo(
+			Bicicleta bicicletaUtilizadaMasTiempo) {
+		this.bicicletaUtilizadaMasTiempo = bicicletaUtilizadaMasTiempo;
+	}
+
+	public Bicicleta getBicicletaUtilizadaMasTiempo() {
+		return bicicletaUtilizadaMasTiempo;
+	}
+
+	public void setTiempoUsoBicicletaMasUsada(Integer tiempoUsoBicicletaMasUsada) {
+		this.tiempoUsoBicicletaMasUsada = tiempoUsoBicicletaMasUsada;
+	}
+
+	public Integer getTiempoUsoBicicletaMasUsada() {
+		return tiempoUsoBicicletaMasUsada;
 	}
 
 }
