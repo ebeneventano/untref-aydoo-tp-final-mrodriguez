@@ -202,7 +202,7 @@ public class ProcesadorEstadisticoTest {
 	}
 	
 	@Test
-	public void getCantidadVecesBicicletaUtilizadaMasVeces()
+	public void getTiempoUsoBicicletaUtilizadaMasVeces()
 			throws IOException, ParseException, ZipException {
 
 		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
