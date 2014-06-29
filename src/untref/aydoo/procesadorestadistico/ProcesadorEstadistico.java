@@ -111,62 +111,6 @@ public class ProcesadorEstadistico {
 		return bicicletaUtilizadaMasVeces;
 	}
 	
-	public Integer getTiempoUsoDeBiciMasUtilizada() {
-
-		Iterator<Bicicleta> iterador = this.bicicletas.values().iterator();
-
-		Bicicleta bicicletaUtilizadaMasVeces = null;
-
-		int vecesUtilizada = 0;
-		int maximo = 0;
-
-		while (iterador.hasNext()) {
-
-			Bicicleta bicicleta = iterador.next();
-
-			vecesUtilizada = bicicleta.getViajes().size();
-
-			if (vecesUtilizada > maximo) {
-
-				maximo = vecesUtilizada;
-				bicicletaUtilizadaMasVeces = bicicleta;
-			}
-		}
-
-		int contadorTiempo = 0;
-		
-		for(Viaje unViaje : bicicletaUtilizadaMasVeces.getViajes()){
-			contadorTiempo += unViaje.getTiempouso();
-		}
-		return contadorTiempo;
-	}
-	
-	public Bicicleta getBicicletaUtilizadaMasTiempo() {
-
-		Iterator<Bicicleta> iterador = this.bicicletas.values().iterator();
-
-		Bicicleta bicicletaUtilizadaMasTiempo = null;
-
-		int maximo = 0;
-
-		while (iterador.hasNext()) {
-			int contadorTiempoUso = 0;
-
-			Bicicleta bicicleta = iterador.next();
-
-			for(Viaje unViaje : bicicleta.getViajes()){
-				contadorTiempoUso+=unViaje.getTiempouso();
-			}
-
-			if (contadorTiempoUso > maximo) {
-
-				maximo = contadorTiempoUso;
-				bicicletaUtilizadaMasTiempo = bicicleta;
-			}
-		}
-		return bicicletaUtilizadaMasTiempo;
-	}
-
 	public Bicicleta getBicicletaUtilizadaMenosVeces() {
 
 		Iterator<Bicicleta> iterador = this.bicicletas.values().iterator();
@@ -198,6 +142,143 @@ public class ProcesadorEstadistico {
 		}
 
 		return bicicletaUtilizadaMenosVeces;
+	}
+	
+	public Resultado devolverResultado(){
+		Iterator<Bicicleta> iterador = this.bicicletas.values().iterator();
+
+		Bicicleta bicicletaUtilizadaMenosVeces = null;
+		Bicicleta bicicletaUtilizadaMasVeces = null;
+		Bicicleta bicicletaUtilizadaMasTiempo = null;
+
+
+		int vecesUtilizada = 0;
+		int maximo = 0;
+		int minimo = 0;
+		int maximoTiempoUso = 0;
+		int contadorTiempo = 0;
+		int sumador = 0;
+		int contador = 0;
+		
+		if (iterador.hasNext()) {
+			Bicicleta bicicleta = iterador.next();
+			vecesUtilizada = bicicleta.getViajes().size();
+			minimo = vecesUtilizada;
+			maximo = vecesUtilizada;
+			bicicletaUtilizadaMasVeces = bicicleta;
+			bicicletaUtilizadaMenosVeces = bicicleta;
+			
+			for(Viaje unViaje : bicicleta.getViajes()){
+				contador++;
+				sumador += unViaje.getTiempouso();
+			}
+		}
+		
+		while (iterador.hasNext()) {
+
+			Bicicleta bicicleta = iterador.next();
+
+			vecesUtilizada = bicicleta.getViajes().size();
+
+			if (vecesUtilizada < minimo) {
+				minimo = vecesUtilizada;
+				bicicletaUtilizadaMenosVeces = bicicleta;
+			}
+			
+			if (vecesUtilizada > maximo) {
+				maximo = vecesUtilizada;
+				bicicletaUtilizadaMasVeces = bicicleta;
+			}
+
+			int contadorTiempoUso = 0;
+			
+			for(Viaje unViaje : bicicleta.getViajes()){
+				contadorTiempoUso+=unViaje.getTiempouso();
+			}
+
+			if (contadorTiempoUso > maximoTiempoUso) {
+
+				maximoTiempoUso = contadorTiempoUso;
+				bicicletaUtilizadaMasTiempo = bicicleta;
+			}
+
+			Iterator<Viaje> iteradorViajes = bicicleta.getViajes().iterator();
+			
+			while (iteradorViajes.hasNext()) {
+				
+				Viaje viaje = iteradorViajes.next();
+				
+				sumador += viaje.getTiempouso();
+				contador++;
+			}
+		}
+		
+		for(Viaje unViaje : bicicletaUtilizadaMasVeces.getViajes()){
+			contadorTiempo += unViaje.getTiempouso();
+		}
+		
+		Resultado resultado = new Resultado(bicicletaUtilizadaMasVeces, bicicletaUtilizadaMenosVeces, 
+				(double) sumador / contador, this.getRecorridoMasVecesRealizado());
+		resultado.setBicicletaUtilizadaMasTiempo(bicicletaUtilizadaMasTiempo);
+		resultado.setTiempoUsoBicicletaMasUsada((double) contadorTiempo);
+		
+		return resultado;
+	}
+	
+	public Double getTiempoUsoDeBiciMasUtilizada() {
+
+		Iterator<Bicicleta> iterador = this.bicicletas.values().iterator();
+
+		Bicicleta bicicletaUtilizadaMasVeces = null;
+
+		int vecesUtilizada = 0;
+		int maximo = 0;
+
+		while (iterador.hasNext()) {
+
+			Bicicleta bicicleta = iterador.next();
+
+			vecesUtilizada = bicicleta.getViajes().size();
+
+			if (vecesUtilizada > maximo) {
+
+				maximo = vecesUtilizada;
+				bicicletaUtilizadaMasVeces = bicicleta;
+			}
+		}
+
+		int contadorTiempo = 0;
+		
+		for(Viaje unViaje : bicicletaUtilizadaMasVeces.getViajes()){
+			contadorTiempo += unViaje.getTiempouso();
+		}
+		return (double) contadorTiempo;
+	}
+	
+	public Bicicleta getBicicletaUtilizadaMasTiempo() {
+
+		Iterator<Bicicleta> iterador = this.bicicletas.values().iterator();
+
+		Bicicleta bicicletaUtilizadaMasTiempo = null;
+
+		int maximo = 0;
+
+		while (iterador.hasNext()) {
+			int contadorTiempoUso = 0;
+
+			Bicicleta bicicleta = iterador.next();
+
+			for(Viaje unViaje : bicicleta.getViajes()){
+				contadorTiempoUso+=unViaje.getTiempouso();
+			}
+
+			if (contadorTiempoUso > maximo) {
+
+				maximo = contadorTiempoUso;
+				bicicletaUtilizadaMasTiempo = bicicleta;
+			}
+		}
+		return bicicletaUtilizadaMasTiempo;
 	}
 
 	public double getTiempoPromedioDeUso() {
@@ -372,6 +453,7 @@ public class ProcesadorEstadistico {
 
 		this.procesarRegistrosOnDemand();
 		Resultado resultado = this.getResultado();
+//		Resultado resultado = this.devolverResultado();
 		String yml = this.getYML(resultado);
 		this.exportarYML(yml, directorio + "/" + this.salida);
 	}

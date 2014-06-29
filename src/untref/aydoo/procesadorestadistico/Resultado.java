@@ -7,7 +7,7 @@ public class Resultado {
 	private double tiempoPromedioDeUso;
 	private Recorrido recorridoMasVecesRealizado;
 	private Bicicleta bicicletaUtilizadaMasTiempo;
-	private Integer tiempoUsoBicicletaMasUsada;
+	private double tiempoUsoBicicletaMasUsada;
 
 	public Resultado(Bicicleta bicicletaUtilizadaMasVeces,
 			Bicicleta bicicletaUtilizadaMenosVeces, double tiempoPromedioDeUso,
@@ -118,11 +118,11 @@ public class Resultado {
 		return bicicletaUtilizadaMasTiempo;
 	}
 
-	public void setTiempoUsoBicicletaMasUsada(Integer tiempoUsoBicicletaMasUsada) {
+	public void setTiempoUsoBicicletaMasUsada(Double tiempoUsoBicicletaMasUsada) {
 		this.tiempoUsoBicicletaMasUsada = tiempoUsoBicicletaMasUsada;
 	}
 
-	public Integer getTiempoUsoBicicletaMasUsada() {
+	public Double getTiempoUsoBicicletaMasUsada() {
 		return tiempoUsoBicicletaMasUsada;
 	}
 

@@ -54,6 +54,21 @@ public class ProcesadorEstadisticoTest {
 
 		Assert.assertEquals(28.2811, tiempoPromedioDeUso, 0.1);
 	}
+	
+	@Test
+	public void getTiempoPromedioDeUsoEnElNuevoMetodoDeDevolverResultado()
+			throws IOException, ParseException, ZipException {
+
+		ProcesadorEstadistico procesadorEstadistico = new ProcesadorEstadistico(
+				"entradas");
+
+		procesadorEstadistico.procesarRegistrosOnDemand();
+		
+		Resultado resultado = procesadorEstadistico.devolverResultado();
+		double tiempoPromedioDeUso = resultado.getTiempoPromedioDeUso();
+
+		Assert.assertEquals(28.2811, tiempoPromedioDeUso, 0.1);
+	}
 
 	@Test
 	public void getRecorridoMasVecesRealizadoDeberiaRetornarRecorridoCalculado()
@@ -102,6 +117,8 @@ public class ProcesadorEstadisticoTest {
 	public void isDaemonDeberiaRetornarFalseSiNoEspecificadoEnLineaDeComandos() {
 
 		String[] args = { "entradas", "--on-demand", "--testing" };
+//		String[] args = { "C:" + File.separator + "Users" + File.separator +
+//				"Emanuel" + File.separator + "prueba TP MARTIN", "--on-demand"};
 
 		try {
 			Main.main(args);
@@ -156,11 +173,18 @@ public class ProcesadorEstadisticoTest {
 		double tiempoPromedio = 28.2811;
 		Recorrido recorridoEsperado = new Recorrido(8, 8, "PLAZA ITALIA",
 				"PLAZA ITALIA");
-
+		Bicicleta bicicletaUtilizadaMasTiempo = new Bicicleta(300);
+		double tiempoUsoBicicletaMasUsada = 300;
+		
 		Resultado resultado = new Resultado(bicicletaMasUsada,
 				bicicletaMenosUsada, tiempoPromedio, recorridoEsperado);
-
+		resultado.setBicicletaUtilizadaMasTiempo(bicicletaUtilizadaMasTiempo);
+		resultado.setTiempoUsoBicicletaMasUsada(tiempoUsoBicicletaMasUsada);
+		
 		String stringEsperada = "!!untref.aydoo.procesadorestadistico.Resultado\n"
+				+ "bicicletaUtilizadaMasTiempo:\n"
+				+ "  id: 300\n"
+				+ "  viajes: !!set {}\n"
 				+ "bicicletaUtilizadaMasVeces:\n"
 				+ "  id: 1235\n"
 				+ "  viajes: !!set {}\n"
@@ -169,7 +193,9 @@ public class ProcesadorEstadisticoTest {
 				+ "  viajes: !!set {}\n"
 				+ "recorridoMasVecesRealizado: {destinoestacionid: 8, destinonombre: PLAZA ITALIA, origenestacionid: 8,\n"
 				+ "  origennombre: PLAZA ITALIA}\n"
-				+ "tiempoPromedioDeUso: 28.2811\n";
+				+ "tiempoPromedioDeUso: 28.2811\n"
+				+ "tiempoUsoBicicletaMasUsada: 300.0\n";
+		
 		String string = procesadorEstadistico.getYML(resultado);
 
 		Assert.assertEquals(stringEsperada, string);
@@ -209,10 +235,10 @@ public class ProcesadorEstadisticoTest {
 				"entradas");
 
 		procesadorEstadistico.procesarRegistrosOnDemand();
-		Integer cantidadVeces = procesadorEstadistico
+		double cantidadVeces = procesadorEstadistico
 				.getTiempoUsoDeBiciMasUtilizada();
 
-		Assert.assertEquals(Integer.valueOf(987), cantidadVeces);
+		Assert.assertEquals(987, cantidadVeces,0.1);
 	}
 	
 	@Test
