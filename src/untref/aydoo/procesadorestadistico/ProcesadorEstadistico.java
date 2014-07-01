@@ -452,8 +452,8 @@ public class ProcesadorEstadistico {
 	public void onDemand() throws IOException, ParseException, ZipException {
 
 		this.procesarRegistrosOnDemand();
-		Resultado resultado = this.getResultado();
-//		Resultado resultado = this.devolverResultado();
+//		Resultado resultado = this.getResultado();
+		Resultado resultado = this.devolverResultado();
 		String yml = this.getYML(resultado);
 		this.exportarYML(yml, directorio + "/" + this.salida);
 	}
