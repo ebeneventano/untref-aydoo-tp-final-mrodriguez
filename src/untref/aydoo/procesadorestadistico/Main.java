@@ -11,10 +11,13 @@ public class Main {
 
 	private static boolean daemon, testing;
 	private static ProcesadorEstadistico procesadorEstadistico;
+	static long time_start;
+	static long time_end;
 
 	public static void main(String[] args) throws IOException, ParseException,
 			ZipException, InterruptedException {
 
+		time_start = System.currentTimeMillis();
 		String directorio = null;
 
 		if (args.length == 0) {
@@ -59,10 +62,11 @@ public class Main {
 				procesadorEstadistico.onDemand();
 			}
 		}
+		time_end = System.currentTimeMillis();
+		System.out.println("the task has taken "+ ( time_end - time_start ) +" milliseconds");
 	}
 
 	public static ProcesadorEstadistico getProcesadorEstadistico() {
-
 		return procesadorEstadistico;
 	}
 
