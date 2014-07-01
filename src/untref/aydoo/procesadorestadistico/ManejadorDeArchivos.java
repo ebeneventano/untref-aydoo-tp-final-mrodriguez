@@ -7,21 +7,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
-
 import au.com.bytecode.opencsv.CSVReader;
 
 public class ManejadorDeArchivos {
 
 	private CSVReader reader;
-	private SimpleDateFormat dateParser = new SimpleDateFormat(
-			"yyyy-mm-dd hh:mm:ss");
+//	private SimpleDateFormat dateParser = new SimpleDateFormat(
+//			"yyyy-mm-dd hh:mm:ss");
 	private File directorio;
 
 	public ManejadorDeArchivos(String directorio) {
@@ -89,8 +86,8 @@ public class ManejadorDeArchivos {
 			int origenestacionid = Integer.parseInt(nextLine[3]);
 			int destinoestacionid = Integer.parseInt(nextLine[6]);
 
-			Date origenfecha = dateParser.parse(nextLine[2]);
-			Date destinofecha = dateParser.parse(nextLine[5]);
+//			Date origenfecha = dateParser.parse(nextLine[2]);
+//			Date destinofecha = dateParser.parse(nextLine[5]);
 
 			int tiempouso;
 
@@ -107,8 +104,8 @@ public class ManejadorDeArchivos {
 			String destinonombre = nextLine[7];
 
 			Registro registro = new Registro(usuarioid, bicicletaid,
-					origenestacionid, destinoestacionid, origenfecha,
-					destinofecha, tiempouso, origennombre, destinonombre);
+					origenestacionid, destinoestacionid, tiempouso, 
+					origennombre, destinonombre);
 
 			registros.add(registro);
 		}

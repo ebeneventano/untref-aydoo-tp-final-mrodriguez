@@ -69,8 +69,7 @@ public class ProcesadorEstadistico {
 				this.recorridos.put(key, recorrido);
 			}
 
-			Viaje viaje = new Viaje(registro.getOrigenfecha(),
-					registro.getDestinofecha(), registro.getTiempouso(),
+			Viaje viaje = new Viaje(registro.getTiempouso(),
 					recorrido);
 
 			Bicicleta bicicleta = this.bicicletas

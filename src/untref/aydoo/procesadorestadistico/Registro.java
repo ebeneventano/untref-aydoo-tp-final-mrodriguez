@@ -1,6 +1,5 @@
 package untref.aydoo.procesadorestadistico;
 
-import java.util.Date;
 
 public class Registro {
 
@@ -8,22 +7,22 @@ public class Registro {
 	private int bicicletaid;
 	private int origenestacionid;
 	private int destinoestacionid;
-	private Date origenfecha;
-	private Date destinofecha;
+//	private Date origenfecha;
+//	private Date destinofecha;
 	private int tiempouso;
 	private String origennombre;
 	private String destinonombre;
 
 	public Registro(int usuarioid, int bicicletaid, int origenestacionid,
-			int destinoestacionid, Date origenfecha, Date destinofecha,
-			int tiempouso, String origennombre, String destinonombre) {
+			int destinoestacionid, int tiempouso, 
+			String origennombre, String destinonombre) {
 
 		this.usuarioid = usuarioid;
 		this.bicicletaid = bicicletaid;
 		this.origenestacionid = origenestacionid;
 		this.destinoestacionid = destinoestacionid;
-		this.origenfecha = origenfecha;
-		this.destinofecha = destinofecha;
+//		this.origenfecha = origenfecha;
+//		this.destinofecha = destinofecha;
 		this.tiempouso = tiempouso;
 		this.origennombre = origennombre;
 		this.destinonombre = destinonombre;
@@ -41,13 +40,13 @@ public class Registro {
 		return destinoestacionid;
 	}
 
-	public Date getOrigenfecha() {
-		return origenfecha;
-	}
-
-	public Date getDestinofecha() {
-		return destinofecha;
-	}
+//	public Date getOrigenfecha() {
+//		return origenfecha;
+//	}
+//
+//	public Date getDestinofecha() {
+//		return destinofecha;
+//	}
 
 	public int getTiempouso() {
 		return tiempouso;
@@ -67,13 +66,13 @@ public class Registro {
 		int result = 1;
 		result = prime * result + bicicletaid;
 		result = prime * result + destinoestacionid;
-		result = prime * result
-				+ ((destinofecha == null) ? 0 : destinofecha.hashCode());
+//		result = prime * result
+//				+ ((destinofecha == null) ? 0 : destinofecha.hashCode());
 		result = prime * result
 				+ ((destinonombre == null) ? 0 : destinonombre.hashCode());
 		result = prime * result + origenestacionid;
-		result = prime * result
-				+ ((origenfecha == null) ? 0 : origenfecha.hashCode());
+//		result = prime * result
+//				+ ((origenfecha == null) ? 0 : origenfecha.hashCode());
 		result = prime * result
 				+ ((origennombre == null) ? 0 : origennombre.hashCode());
 		result = prime * result + tiempouso;
@@ -94,11 +93,11 @@ public class Registro {
 			return false;
 		if (destinoestacionid != other.destinoestacionid)
 			return false;
-		if (destinofecha == null) {
-			if (other.destinofecha != null)
-				return false;
-		} else if (!destinofecha.equals(other.destinofecha))
-			return false;
+//		if (destinofecha == null) {
+//			if (other.destinofecha != null)
+//				return false;
+//		} else if (!destinofecha.equals(other.destinofecha))
+//			return false;
 		if (destinonombre == null) {
 			if (other.destinonombre != null)
 				return false;
@@ -106,11 +105,11 @@ public class Registro {
 			return false;
 		if (origenestacionid != other.origenestacionid)
 			return false;
-		if (origenfecha == null) {
-			if (other.origenfecha != null)
-				return false;
-		} else if (!origenfecha.equals(other.origenfecha))
-			return false;
+//		if (origenfecha == null) {
+//			if (other.origenfecha != null)
+//				return false;
+//		} else if (!origenfecha.equals(other.origenfecha))
+//			return false;
 		if (origennombre == null) {
 			if (other.origennombre != null)
 				return false;
