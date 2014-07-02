@@ -1,0 +1,13 @@
+MEDICION DE TIEMPOS:
+Se utilizo un archivo csv de gran tamaño para que demore un tiempo significativo y sea mas facil de medir.
+La medición se hizo con un cronometro, desde que empezaba a correr hasta la finalizacion del mismo.
+
+Se midió primero un archivo .jar (el proporcionado por mi compañero) y sin aplicarle ningun cambio. El tiempo de procesamiento fue de aproximadamente 20 segundos.
+Luego se aplicaron las mejoras propuestas, se creo un nuevo .jar y se volvio a medir, siempre con el mismo archivo y realizando los mismos pasos.
+El resultado fué de aproximadamente 10 segundos.
+
+MEJORAS APLICADAS:
+
+1. Se estaba procesando y teniendo en cuenta la fecha origen y fecha destino de los recorridos, pero no habia requerimientos de sacar estadistica o de mostrar fechas, por lo tanto se dejo de procesar y tener en cuenta las mismas.
+
+2. Esta mejora es la mas importante y creo, la mas significativa. Para calcular la estadistica y los requerimientos pedidos, primero se llena una lista de bicicletas mientras se va recorriendo el csv. Luego por cada requerimiento se recorría esta misma lista. La mejora consistió en que se recorra solo una vez esta colección, ya que cuando el csv era de gran tamaño y la cantidad de bicicletas distintas eran muchas, recorrer una sola vez la lista implicó que el tiempo baje en un 50 porciento.
